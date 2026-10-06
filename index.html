@@ -253,7 +253,7 @@ table.tb td.q{background:var(--hl);color:var(--ink)}
 .seg button[aria-pressed="true"]{background:var(--u);color:#fff}
 .seg button small{display:block;font-weight:400;font-size:.7rem}
 .ver{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--mute)}
-.score{font-family:var(--num);font-size:2.2rem;font-weight:700;color:var(--u)}
+.score{font-family:var(--num);font-size:2.2rem;font-weight:700;color:var(--u);display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}.score-pct{font-size:1.6rem;background:var(--u);color:#fff;border-radius:12px;padding:.05rem .8rem}
 details.teacher{margin-top:1.6rem;background:var(--card);border:2px solid var(--line);border-radius:var(--rad);padding:.8rem 1rem}
 details.teacher summary{font-weight:700;cursor:pointer;font-family:var(--display);font-size:1.15rem;min-height:2.4rem}
 table.key{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:.8rem}
@@ -288,7 +288,7 @@ table.key th{background:var(--accent-soft)}
 .calc button.eq{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 
 /* 學習紀錄 */
-.prog-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1rem 0 1.2rem}
+.prog-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin:1rem 0 1.2rem}
 .prog-sum .card{display:flex;flex-direction:column;gap:.1rem;padding:.8rem 1rem}
 .prog-sum b{font-family:var(--num);font-size:1.7rem;color:var(--accent)}
 .prog-sum span{color:var(--mute);font-size:.85rem}
@@ -326,6 +326,102 @@ details.grp[open]>summary::before{transform:rotate(90deg)}
 .grp-t{font-family:var(--display);font-weight:700;font-size:1.55rem;flex:1}
 .grp-n{color:var(--mute);font-size:.9rem;white-space:nowrap}
 details.grp>.units{padding:0 1.1rem 1.1rem}
+/* 星星集點 */
+:root{--star:#D99A00}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--star:#F0C24F}}
+:root[data-theme="dark"]{--star:#F0C24F}
+.stars-txt{color:var(--star);letter-spacing:.06em;white-space:nowrap}
+.stars-txt .off{color:var(--line)}
+.lvl-stars{display:inline-block;margin-left:.5rem;font-size:1rem}
+.earn{font-size:3rem;line-height:1.1;margin:.2rem 0 .3rem;animation:pop .45s ease-out}
+.new-rec{color:var(--accent);font-weight:700;margin:.3rem 0}
+.star-n{color:var(--star);font-family:var(--num)}
+.got-badge{display:inline-flex;gap:.8rem;align-items:center;text-align:left;margin-top:.6rem;padding:.7rem 1rem;border:2px solid var(--star);border-radius:14px;background:var(--card)}
+.got-badge svg{width:3rem;height:3rem;flex:none}
+.star-sum{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;margin:0 0 1.2rem;padding:.8rem 1.2rem}
+.star-big{font-family:var(--num);font-weight:700;font-size:2rem;color:var(--star)}
+.star-big small{font-size:.9rem;color:var(--mute)}
+.star-next{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;flex:1;min-width:0}
+.star-bar{flex:1;min-width:120px}.star-bar i{background:var(--star)}
+.pill-badge{display:inline-flex;align-items:center;gap:.3rem;border:2px solid var(--star);border-radius:999px;padding:.1rem .7rem .1rem .3rem;font-weight:700;font-size:.85rem}
+.pill-badge svg{width:1.6rem;height:1.6rem}
+.badges{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin:0 0 1.2rem}
+.badge-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.2rem;padding:.6rem .4rem;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--mute)}
+.badge-item.got{border-color:var(--star);color:var(--ink)}
+.badge-item svg{width:2.8rem;height:2.8rem}
+.badge-item b{font-size:.85rem}.badge-item small{font-size:.72rem;color:var(--mute)}
+.md-c{fill:var(--star)}.md-r{fill:var(--accent)}.md-s{fill:#fff}.md-off{fill:var(--line)}.md-offs{fill:var(--card)}
+@media (max-width:640px){.badges{grid-template-columns:repeat(3,1fr)}}
+/* 練習遊戲 */
+.drill-h{margin:1.6rem 0 .7rem}
+.drill-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.drill-card{display:flex;gap:1rem;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1rem 1.2rem;min-height:5.4rem}
+.drill-card:hover{border-color:var(--accent)}
+.drill-card b{font-family:var(--display);font-size:1.3rem;display:block}
+.drill-card small{color:var(--mute);font-size:.85rem;line-height:1.5}
+.dc-ic{width:3.3rem;height:3.3rem;border-radius:14px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--num);font-weight:700;font-size:2rem;flex:none}
+.tt-tables{display:grid;grid-template-columns:repeat(8,1fr);gap:.5rem;margin:1rem 0 .7rem}
+.tt-tab{border:2px solid var(--line);background:var(--card);border-radius:14px;padding:.35rem .2rem;display:flex;flex-direction:column;align-items:center;min-height:3.9rem}
+.tt-tab b{font-family:var(--num);font-size:1.6rem;line-height:1.1}
+.tt-tab small{font-size:.7rem;color:var(--mute)}
+.tt-tab.on{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.tt-tab.master{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}.tt-tab.master small{color:var(--on-accent);font-weight:700}.tt-tab.master.on{box-shadow:0 0 0 4px var(--accent-soft),0 0 0 6px var(--accent)}
+.tt-modes{display:flex;gap:.5rem;flex-wrap:wrap}
+.tt-mode{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:.4rem 1.1rem;font-weight:700;min-height:2.9rem}
+.tt-mode.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tt-card{text-align:center}
+.tt-dots{display:flex;gap:.3rem;justify-content:center;flex-wrap:wrap;margin-bottom:.6rem}
+.tt-dots i{width:.75rem;height:.75rem;border-radius:50%;background:var(--line)}
+.tt-dots i.done{background:var(--ok)}.tt-dots i.cur{background:var(--accent)}
+.tt-eq{font-family:var(--num);font-weight:700;font-size:3.3rem;display:flex;justify-content:center;align-items:center;gap:.5rem;margin:1.2rem 0;flex-wrap:wrap}
+.tt-eq .op{color:var(--accent)}
+.tt-blank{min-width:4.4rem;border:4px dashed var(--accent);border-radius:16px;padding:0 .4rem;color:var(--mute)}
+.tt-blank.typed{color:var(--ink);border-style:solid}
+.tt-blank.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.tt-blank.bad{border-color:var(--warn);background:var(--warn-bg);color:var(--warn)}
+.tt-sel{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.dpad{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;max-width:390px;margin:auto}
+.dkey{min-height:4.1rem;border-radius:16px;border:2px solid var(--line);background:var(--card);font-family:var(--num);font-weight:700;font-size:1.9rem}
+.dkey:active{background:var(--accent-soft)}
+.dkey.ok{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-family:var(--body);font-size:1.25rem}
+.as-levels{display:flex;gap:.4rem;flex-wrap:wrap;margin:.8rem 0}
+.as-lv{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:.35rem .9rem;font-weight:700;font-size:.85rem;min-height:2.6rem;color:var(--mute)}
+.as-lv.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.as-lv.tm.on{background:var(--hl);border-color:var(--hl);color:var(--ink)}
+.as-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.9rem}
+.as-stats div{background:var(--card);border:1px solid var(--line);border-radius:12px;text-align:center;padding:.4rem}
+.as-stats b{display:block;font-family:var(--num);font-size:1.45rem;color:var(--accent)}
+.as-stats small{color:var(--mute);font-size:.72rem}
+.as-timer{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.as-track{flex:1;height:10px;border-radius:99px;background:var(--grid);overflow:hidden}
+.as-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .1s linear}
+.as-fill.warn{background:var(--hl)}.as-fill.danger{background:var(--warn)}
+.as-board{display:grid;justify-content:center;column-gap:.25rem;row-gap:.15rem;font-family:var(--num);font-weight:700;font-size:2.6rem;margin:0 auto;width:fit-content}
+.as-board .c{text-align:center;line-height:1.2;display:flex;justify-content:center;align-items:flex-end}
+.as-board .op{color:var(--accent)}
+.as-board .rule{grid-column:1/-1;border-bottom:4px solid var(--ink);margin:.2rem 0 .5rem}
+.as-note{height:1.8rem;width:1.8rem;border:2px dashed var(--line);border-radius:8px;font-size:1rem;font-weight:700;color:var(--accent);background:none;padding:0;font-family:var(--num)}
+.as-ans{width:3.1rem;height:3.6rem;border:3px solid var(--line);border-radius:12px;display:grid;place-items:center;background:var(--card);cursor:pointer}
+.as-ans.act{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.as-ans.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.as-ans.bad{border-color:var(--warn);background:var(--warn-bg);color:var(--warn)}
+.tt-mini{display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0}
+.tt-mini span{border:2px solid var(--line);border-radius:10px;padding:.1rem .5rem;font-family:var(--num);font-weight:700;display:flex;flex-direction:column;align-items:center;min-width:3rem}
+.tt-mini small{font-size:.65rem;color:var(--mute);font-weight:400}
+.tt-mini .master{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}.tt-mini .master small{color:var(--on-accent)}
+.tt-mini .doing{border-color:var(--accent)}
+.drill-prog{display:grid;gap:.8rem;margin-bottom:1.2rem}
+.rw-wrap{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--ink) 40%,transparent);display:grid;place-items:center;padding:16px}
+.rw-card{background:var(--card);border:4px solid var(--star);border-radius:26px;padding:1.4rem 2rem 1.6rem;text-align:center;max-width:360px;width:100%;animation:pop .45s ease-out;box-shadow:0 20px 50px -20px rgba(0,0,0,.45)}
+.rw-medal svg{width:6.5rem;height:6.5rem}
+.rw-card h2{font-size:1.7rem;margin:.3rem 0}
+.rw-card .btn{margin-top:.9rem}
+.rw-stars{display:flex;justify-content:center;gap:.4rem;color:var(--star);font-size:2rem;line-height:1}
+.rw-stars span{animation:rwbounce .8s ease-in-out infinite}
+.rw-stars span:nth-child(2){animation-delay:.12s;font-size:2.6rem}
+.rw-stars span:nth-child(3){animation-delay:.24s}
+@keyframes rwbounce{50%{transform:translateY(-8px)}}
+@media (max-width:640px){.drill-cards{grid-template-columns:1fr}.tt-tables{grid-template-columns:repeat(4,1fr)}.tt-eq{font-size:2.4rem}.as-stats{grid-template-columns:repeat(2,1fr)}.as-board{font-size:2.1rem}}
 /* iPad landscape and other wide screens */
 @media (min-width:900px){
   .split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem;align-items:start}
@@ -623,7 +719,7 @@ function diffDivGen(g,wantInt){
     {p:`分母一樣了，分子相除：${n1} ÷ ${n2} = ?${wantInt?'':'（可以寫成分數）'}`,ans:fin}],ask:`${F(a1,d1)} ÷ ${F(a2,d2)} = ?${wantInt?'':'（可以寫成假分數）'}`,ans:fin};
 }
 function bigSmallGen(g,X,divs,fmtDiv){
-  const ty=g.int(0,2);const div=g.pick(divs[ty]);const s1=[1,0,2][ty],s2=[0,1,2][ty];const dv=fmtDiv(div);
+  const ty=g.int(0,2);const div=g.pick(divs[ty]);const s1=[0,1,2][ty],s2=[1,0,2][ty];const dv=fmtDiv(div);
   const fin=ch([`比 ${X} 大`,`比 ${X} 小`,`和 ${X} 一樣`],s2);
   return{q:`不用算，想一想 <b>${X} ÷ ${dv}</b>。`,v:'',steps:[
     {p:`除數 ${dv} 比 1 大、比 1 小，還是等於 1？`,ans:ch(['比 1 大','比 1 小','等於 1'],s1),hint:'分子比分母小，分數就比 1 小；0.幾 也比 1 小。'},
@@ -859,7 +955,7 @@ const U=[
    if(t==='tri'){a=3;d=2;name='三角形';}else if(t==='sq'){a=4;d=3;name='正方形';}else{a=g.int(2,9);d=g.int(3,7);name='';}
    const N=g.int(12,25),T=a+(N-1)*d;
    return{q:t==='seq'?`數列：${a}、${a+d}、${a+2*d}、…`:`用火柴棒排${name}（像右邊的圖）。`,v:t==='seq'?'':matchRow(t),steps:[
-    {p:'每次多多少？',ans:NUM(d)},{p:`${T} 比第 1 個多了多少？${T} − ${a} = ?`,ans:NUM(T-a)},{p:`多了幾次 ${d}？${T-a} ÷ ${d} = ?`,ans:NUM(N-1),hint:'多了幾次，再加 1 才是第幾個。'}],
+    {p:'每次多多少？',ans:NUM(d)},{p:`${T} 比第 1 個多了多少？${T} − ${a} = ?`,ans:NUM(T-a)},{p:`多了幾次 ${d}？${T-a} ÷ ${d} = ?`,ans:NUM(N-1),hint:'多了幾次，再加 1 才是第幾個。'},{p:`第 1 個本身也要算進去：${N-1} + 1 = ?，所以是第幾個？`,ans:NUM(N,'個'),hint:'第 1 個再往後數幾次，就要加 1。'}],
     ask:t==='seq'?`${T} 是第幾個數？`:`用了 ${T} 根，排的是第幾個${name}？`,ans:NUM(N,'個')};},
   fix:'先找「每次多多少」，再用：第 n 個 = 第 1 個 + 每次多的 × (n − 1)。反過來求第幾個：(總數 − 第 1 個) ÷ 每次多的 + 1。'},
  {title:'和差積商不變',sub:'找出不會變的那個關係',
@@ -1484,17 +1580,52 @@ const V=()=>$('#view');
 let stageSel={};
 function render(){
   try{window.speechSynthesis&&speechSynthesis.cancel();}catch(e){}
-  hidePad();document.body.append(pad);
+  hidePad();document.body.append(pad);drillStop();
   const hs=location.hash.slice(1);let m;
   if((m=hs.match(/^u(\d)-l(\d)$/))&&U[m[1]-1]&&U[m[1]-1].levels[m[2]-1])viewLevel(+m[1]-1,+m[2]-1);
   else if((m=hs.match(/^u(\d)-quiz$/))&&U[m[1]-1])viewQuiz(+m[1]-1);
   else if((m=hs.match(/^u(\d)$/))&&U[m[1]-1])viewUnit(+m[1]-1);
   else if(hs==='progress')viewProgress();
+  else if(hs==='times')viewTimes();
+  else if(hs==='addsub')viewAddSub();
   else viewHome();
   window.scrollTo(0,0);
 }
 const uvar=u=>`--u:var(--u${u+1})`;
 const bindGo=root=>$$('[data-go]',root).forEach(b=>b.onclick=()=>go(b.dataset.go));
+
+/* ---------- 星星集點：每一關「我會」過關得 1～3 顆星，集滿換獎章 ---------- */
+/* badge thresholds scale with this book: 星光冠軍 = every level at 3 stars (one mode) */
+const BADGE_BASE=U.reduce((s,un)=>s+un.levels.length,0)*3;
+const BADGES=[[.05,'星星新手'],[.15,'小小探險家'],[.3,'數學小勇士'],[.5,'努力達人'],[.75,'數學小博士'],[1,'星光冠軍']].map(([r,nm])=>[Math.max(1,Math.round(r*BADGE_BASE)),nm]);
+const starKey=(u,l,a)=>lkey(u,l)+(a?'a':'b');
+const starsOf=(u,l,a)=>(store.st||{})[starKey(u,l,a)]||0;
+const totalStars=()=>Object.values(store.st||{}).reduce((s,x)=>s+x,0);
+const maxStars=()=>U.reduce((s,un)=>s+un.levels.length,0)*3*progModes().length;
+const nextBadge=n=>BADGES.find(b=>n<b[0]);
+function starsHTML(n,max=3){return '<span class="stars-txt" aria-label="'+n+' 顆星">'+'★'.repeat(n)+'<span class="off">'+'☆'.repeat(Math.max(0,max-n))+'</span></span>';}
+const medalSVG=got=>'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M16 2h16l-4 14h-8z" class="'+(got?'md-r':'md-off')+'"/><circle cx="24" cy="30" r="15" class="'+(got?'md-c':'md-off')+'"/><path d="M24 20l3 6.2 6.8.8-5 4.7 1.3 6.8L24 35.2l-6.1 3.3 1.3-6.8-5-4.7 6.8-.8z" class="'+(got?'md-s':'md-offs')+'"/></svg>';
+function awardStars(u,l,first,a){
+  store.st=store.st||{};const n=first.filter(Boolean).length;const earned=n>=3?3:n===2?2:1;
+  const k=starKey(u,l,a),prev=store.st[k]||0,before=totalStars();if(earned>prev)store.st[k]=earned;save();
+  const after=totalStars();return{earned,prev,total:after,newBadge:BADGES.find(b=>before<b[0]&&after>=b[0])};
+}
+function starResult(r){
+  const msg=r.earned===3?'三題都一次就答對，拿到 3 顆星！':r.earned===2?'很棒！拿到 2 顆星。下次三題都一次答對，就有 3 顆星。':'過關了！拿到 1 顆星。再練一次，一次就答對可以拿到更多星星。';
+  const nb=nextBadge(r.total);
+  return '<div class="earn">'+starsHTML(r.earned)+'</div><p class="lead">'+msg+'</p>'
+    +(r.prev&&r.earned>r.prev?'<p class="new-rec">新紀錄！這一關從 '+r.prev+' 顆星變成 '+r.earned+' 顆星。</p>':'')
+    +(r.prev&&r.earned<=r.prev?'<p class="muted">這一關最好的紀錄是 '+r.prev+' 顆星。</p>':'')
+    +'<p class="muted">你現在一共有 <b class="star-n">★ '+r.total+'</b> 顆星'+(nb?'，再 '+(nb[0]-r.total)+' 顆就能得到「'+nb[1]+'」獎章。':'，所有獎章都拿到了！')+'</p>'
+    +(r.newBadge?'<div class="got-badge">'+medalSVG(true)+'<div><b>得到新獎章：「'+r.newBadge[1]+'」</b><br><span class="muted">到「學習紀錄」可以看到你的獎章。</span></div></div>':'');
+}
+function starSummary(){
+  const n=totalStars(),nb=nextBadge(n),prevB=[...BADGES].reverse().find(b=>n>=b[0]);
+  const from=prevB?prevB[0]:0,pct=nb?Math.round((n-from)/(nb[0]-from)*100):100;
+  return '<div class="star-sum card"><div class="star-big">★ '+n+'<small> / '+maxStars()+' 顆星</small></div><div class="star-next">'+(prevB?'<span class="pill-badge">'+medalSVG(true)+prevB[1]+'</span>':'')
+    +(nb?'<div class="bar star-bar"><i style="width:'+pct+'%"></i></div><span class="muted">再 '+(nb[0]-n)+' 顆星 → 「'+nb[1]+'」</span>':'<span class="muted">所有獎章都拿到了！</span>')+'</div></div>';
+}
+function badgeShelf(){const n=totalStars();return '<div class="badges">'+BADGES.map(([k,name])=>'<div class="badge-item'+(n>=k?' got':'')+'">'+medalSVG(n>=k)+'<b>'+name+'</b><small>'+(n>=k?'已得到':'需要 '+k+' 顆星')+'</small></div>').join('')+'</div>';}
 
 /* ---------- 學習紀錄：每個單元的完成進度和評量結果（存在這台裝置） ---------- */
 const hasAdvMode=()=>typeof ASTG!=='undefined'&&typeof modeSeg==='function'&&modeSeg()!=='';
@@ -1503,8 +1634,9 @@ const hasAdvQuiz=()=>!!(U[0]&&U[0].levels[0]&&U[0].levels[0].adv)&&document.titl
 function pctBy(u,SG){const L=U[u].levels;let d=0;L.forEach((_,l)=>{const st=stagesOf(u,l);d+=SG.filter(s=>st[s[0]]).length;});return Math.round(d/(L.length*SG.length)*100);}
 const doneBy=(u,l,SG)=>{const st=stagesOf(u,l);return SG.every(s=>st[s[0]]);};
 const startedBy=(u,l,SG)=>{const st=stagesOf(u,l);return SG.some(s=>st[s[0]]);};
-function summary(){const m=progModes()[0][2];return{title:document.title,pct:Math.round(U.reduce((s,_,u)=>s+pctBy(u,m),0)/U.length),
+function summary(){const m=progModes()[0][2];const _st=totalStars(),_b=[...BADGES].reverse().find(b=>_st>=b[0]);return{title:document.title,stars:_st,maxStars:maxStars(),badge:_b?_b[1]:'',pct:Math.round(U.reduce((s,_,u)=>s+pctBy(u,m),0)/U.length),
   units:U.map((un,u)=>({n:un.name,p:pctBy(u,m),b:store.q[u+'b']||'',a:store.q[u+'a']||'',last:(store.qh&&store.qh[u]&&store.qh[u][0])||null})),t:Date.now()};}
+const bp=s=>{const [a,b]=String(s).split('/').map(Number);return b?s+'（'+Math.round(a/b*100)+' 分）':s;};
 const fmtTime=t=>{try{return new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});}catch(e){return '';}};
 function viewProgress(){
   const modes=progModes(),advQ=hasAdvQuiz();
@@ -1519,7 +1651,11 @@ function viewProgress(){
     <div class="card"><b>${overall}%</b><span>全冊完成${modes[0][1]?`（${modes[0][1]}）`:''}</span></div>
     <div class="card"><b>${doneLv} / ${totalLv}</b><span>完成的關卡</span></div>
     <div class="card"><b>${quizzed} / ${U.length}</b><span>做過評量的單元</span></div>
+    <div class="card"><b class="star-n">★ ${totalStars()}</b><span>集到的星星（最多 ${maxStars()} 顆）</span></div>
   </div>
+  <h2 style="margin:.2rem 0 .6rem">我的獎章</h2>
+  ${badgeShelf()}
+  ${drillProgress()}
   <div class="prog-list">${U.map((un,u)=>{
     const hist=(store.qh&&store.qh[u])||[];const last=hist[0];
     const weak=last?un.levels.map((lv,li)=>({lv,li,r:last.per[li]})).filter(x=>x.r&&x.r[0]<x.r[1]):[];
@@ -1527,16 +1663,191 @@ function viewProgress(){
       <div class="prog-head"><span class="badge small-badge">${u+1}</span><h2>${un.name}</h2></div>
       ${modes.map(([mk,mn,SG])=>{const p=pctBy(u,SG),dn=un.levels.filter((_,l)=>doneBy(u,l,SG)).length;return`
       <div class="prog-row"><span class="prog-lab">${mn?mn+'進度':'完成進度'}</span><div class="bar"><i style="width:${p}%"></i></div><span class="prog-num">${dn} / ${un.levels.length} 關</span></div>
-      <div class="lv-chips">${un.levels.map((L,l)=>{const d=doneBy(u,l,SG),s=startedBy(u,l,SG);return`<button type="button" class="lv-chip ${d?'done':s?'doing':''}" data-go="u${u+1}-l${l+1}" title="${L.title}">${d?'✓ ':''}${l+1}. ${L.title}</button>`;}).join('')}</div>`;}).join('')}
+      <div class="lv-chips">${un.levels.map((L,l)=>{const d=doneBy(u,l,SG),s=startedBy(u,l,SG);return`<button type="button" class="lv-chip ${d?'done':s?'doing':''}" data-go="u${u+1}-l${l+1}" title="${L.title}">${d?'✓ ':''}${l+1}. ${L.title}${starsOf(u,l,mk==='a')?' '+'★'.repeat(starsOf(u,l,mk==='a')):''}</button>`;}).join('')}</div>`;}).join('')}
       <div class="prog-quiz">
-        <div><span class="prog-lab">評量</span>${last?`最近一次 <b>${last.r} / ${last.n}</b>（${advQ?(last.d==='a'?'進階卷 ':'基礎卷 '):''}${'ABC'[last.v]||'A'} 卷，${fmtTime(last.t)}）`:'<span class="muted">還沒做過</span>'}</div>
-        ${store.q[u+'b']||store.q[u+'a']?`<div class="muted">最佳：${[store.q[u+'b']?(advQ?'基礎 ':'')+store.q[u+'b']:'',store.q[u+'a']?'進階 '+store.q[u+'a']:''].filter(Boolean).join('　')}　・共做了 ${hist.length} 次</div>`:''}
+        <div><span class="prog-lab">評量</span>${last?`最近一次 <b>${last.r} / ${last.n}・${Math.round(last.r/last.n*100)} 分</b>（${advQ?(last.d==='a'?'進階卷 ':'基礎卷 '):''}${'ABC'[last.v]||'A'} 卷，${fmtTime(last.t)}）`:'<span class="muted">還沒做過</span>'}</div>
+        ${store.q[u+'b']||store.q[u+'a']?`<div class="muted">最佳：${[store.q[u+'b']?(advQ?'基礎 ':'')+bp(store.q[u+'b']):'',store.q[u+'a']?'進階 '+bp(store.q[u+'a']):''].filter(Boolean).join('　')}　・共做了 ${hist.length} 次</div>`:''}
         ${weak.length?`<div class="weak">需要再練習：${weak.map(x=>`<button type="button" class="link" data-go="u${u+1}-l${x.li+1}">第 ${x.li+1} 關 ${x.lv.title}（${x.r[0]}/${x.r[1]}）</button>`).join('')}</div>`:last?'<div class="ok-line">最近一次每一關都答對了！</div>':''}
         <button type="button" class="btn ghost small" data-go="u${u+1}-quiz">${last?'再做一次評量':'去做評量'}</button>
       </div></article>`;}).join('')}</div>
   <p class="note">「需要再練習」是依照最近一次評量答錯的題目，對應到的關卡。</p>`;
   bindGo(V());bindHome();
 }
+
+/* ---------- 練習遊戲：九九乘法精熟、加減法特訓 ---------- */
+function drillStore(){store.dr=store.dr||{};const D=store.dr;D.tt=D.tt||{};D.as=D.as||{best:0,lv:1};return D;}
+const DR={timer:null,key:null};
+function drillStop(){clearInterval(DR.timer);DR.timer=null;document.querySelectorAll('.rw-wrap').forEach(x=>x.remove());if(DR.key){document.removeEventListener('keydown',DR.key);DR.key=null;}}
+function drillKeys(fn){if(DR.key)document.removeEventListener('keydown',DR.key);DR.key=e=>{if(e.target&&/INPUT|TEXTAREA/.test(e.target.tagName))return;if(/^[0-9]$/.test(e.key)){fn(e.key);e.preventDefault();}else if(e.key==='Backspace'){fn('⌫');e.preventDefault();}else if(e.key==='Enter'){fn('OK');e.preventDefault();}};document.addEventListener('keydown',DR.key);}
+function padHTML(keys){return '<div class="dpad">'+keys.map(k=>`<button type="button" class="dkey${k.length>1?' wide':''}${k==='確定'?' ok':''}" data-k="${k}" aria-label="${k==='⌫'?'刪掉':k==='⏭'?'換新的一題':k}">${k}</button>`).join('')+'</div>';}
+const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const TABLES=[2,3,4,5,6,7,8,9],TT_STEPS=['seq','rand','gap'];
+const ttMastered=n=>{const m=drillStore().tt[n]||{};return TT_STEPS.every(k=>m[k]);};
+function drillCards(){const D=drillStore();const m=TABLES.filter(ttMastered).length;
+  return `<h2 class="drill-h">計算練功房</h2><div class="drill-cards">
+  <button class="drill-card" type="button" data-go="times"><span class="dc-ic">×</span><span><b>九九乘法精熟</b><small>順序・亂序・乘數挖空・小測驗<br>已精熟 ${m} / 8 個乘法表</small></span></button>
+  <button class="drill-card" type="button" data-go="addsub"><span class="dc-ic">±</span><span><b>加減法特訓</b><small>不進退位 → 進位 → 退位 → 綜合 → 三位數<br>最佳連續答對 ${D.as.best||0} 題</small></span></button></div>`;}
+
+/* 九九乘法精熟 */
+const TT_MODES=[['seq','順序'],['rand','亂序'],['gap','乘數挖空'],['quiz','小測驗']];
+const TT_DESC={seq:n=>`${n} × 1、${n} × 2……${n} × 9，一個一個往上背。`,rev:n=>`${n} × 9、${n} × 8……${n} × 1，倒過來背。`,rand:n=>`${n} 的乘法打亂順序，看你是不是真的記住了。`,gap:n=>`${n} × □ = ${n*3}，找出被挖掉的乘數。`,quiz:()=>'從選好的乘法表混合出 20 題，看看你記得多少。'};
+const TT={n:2,mode:'seq',sel:TABLES.slice()};
+function viewTimes(){
+  const D=drillStore();
+  V().innerHTML=`<div class="drill">
+   <div class="crumbs"><button class="link" type="button" data-go="">${ICON.back}總目錄</button></div>
+   <h1>九九乘法精熟</h1><p class="lead">選一個乘法表，順序、亂序、乘數挖空三關都過，就精熟了！最後用小測驗混合挑戰。</p>
+   <div class="tt-tables" role="group" aria-label="選乘法表">${TABLES.map(n=>{const m=D.tt[n]||{};const c=TT_STEPS.filter(k=>m[k]).length;return `<button type="button" class="tt-tab${n===TT.n&&TT.mode!=='quiz'?' on':''}${c===TT_STEPS.length?' master':''}" data-n="${n}"><b>${n}</b><small>${c===TT_STEPS.length?'精熟 ✓':c+' / '+TT_STEPS.length+' 關'}</small></button>`;}).join('')}</div>
+   <div class="tt-modes" role="group" aria-label="練習方式">${TT_MODES.map(([k,nm])=>{const done=k!=='quiz'&&(D.tt[TT.n]||{})[k];return `<button type="button" class="tt-mode${TT.mode===k?' on':''}" data-m="${k}">${done?'✓ ':''}${nm}</button>`;}).join('')}</div>
+   <p class="muted" style="margin:.6rem 0 1rem">${TT.mode==='quiz'?TT_DESC.quiz():`<b>${TT.n} 的乘法・${TT_MODES.find(x=>x[0]===TT.mode)[1]}</b>：`+TT_DESC[TT.mode](TT.n)}</p>
+   <div id="tt-stage"></div></div>`;
+  bindGo(V());
+  $$('.tt-tab',V()).forEach(b=>b.onclick=()=>{TT.n=+b.dataset.n;if(TT.mode==='quiz')TT.mode='seq';drillStop();viewTimes();});
+  $$('.tt-mode',V()).forEach(b=>b.onclick=()=>{TT.mode=b.dataset.m;drillStop();viewTimes();});
+  TT.mode==='quiz'?ttQuizSetup():ttRun();
+}
+function ttList(){const n=TT.n,ks=[1,2,3,4,5,6,7,8,9];
+  if(TT.mode==='seq')return ks.map(k=>({a:n,b:k,hide:'c'}));
+  if(TT.mode==='rev')return ks.reverse().map(k=>({a:n,b:k,hide:'c'}));
+  if(TT.mode==='rand')return shuf(ks).map(k=>({a:n,b:k,hide:'c'}));
+  return shuf(ks).map(k=>({a:n,b:k,hide:'b'}));}
+function ttQuizSetup(){
+  const box=$('#tt-stage');const D=drillStore();const pc=r=>Math.round(r.r/r.n*100);
+  box.innerHTML=`<div class="card narrow"><b>要考哪些乘法表？</b><div class="tt-sel">${TABLES.map(n=>`<button type="button" class="chip" data-s="${n}" aria-pressed="${TT.sel.includes(n)}">${n} 的乘法</button>`).join('')}</div>
+   ${D.quiz?`<p class="muted">上次：${D.quiz.last.r} / ${D.quiz.last.n}（${pc(D.quiz.last)} 分）　最佳：${D.quiz.best.r} / ${D.quiz.best.n}（${pc(D.quiz.best)} 分）</p>`:''}
+   <button class="btn" type="button" id="tt-go">開始小測驗（20 題）</button></div>`;
+  $$('[data-s]',box).forEach(b=>b.onclick=()=>{const n=+b.dataset.s;TT.sel=TT.sel.includes(n)?TT.sel.filter(x=>x!==n):[...TT.sel,n].sort((x,y)=>x-y);if(!TT.sel.length)TT.sel=[n];ttQuizSetup();});
+  $('#tt-go',box).onclick=()=>{const list=[];let prev='';for(let i=0;i<20;i++){let a,b,k;do{a=TT.sel[ri(0,TT.sel.length-1)];b=ri(1,9);k=a+'x'+b;}while(k===prev&&TT.sel.length*9>1);prev=k;list.push({a,b,hide:Math.random()<.2?'b':'c'});}ttRun(list,true);};
+}
+function ttRun(list,quiz){
+  list=list||ttList();const box=$('#tt-stage');let i=0,typed='',tries=0,first=0,lock=false,streak=0;const wrong=[];const t0=Date.now();
+  const sayQ=q=>q.hide==='b'?`${q.a} 乘 多少 等於 ${q.a*q.b}`:`${q.a} 乘 ${q.b} 等於多少`;
+  function draw(){if(!box.isConnected)return;const q=list[i];const c=q.a*q.b;
+    const cell=(v,h)=>h?`<span class="tt-blank">？</span>`:`<span>${v}</span>`;
+    box.innerHTML=`<div class="split"><div class="card tt-card">
+      <div class="tt-dots">${list.map((_,j)=>`<i class="${j<i?'done':j===i?'cur':''}"></i>`).join('')}</div>
+      <div class="tt-eq">${cell(q.a,false)}<span class="op">×</span>${cell(q.b,q.hide==='b')}<span class="op">=</span>${cell(c,q.hide==='c')}</div>
+      <div id="tt-fb" aria-live="polite"></div>
+      <div class="row" style="justify-content:center;margin-top:.6rem"><button class="say no-say" type="button" id="tt-say" aria-label="唸題目">${ICON.say}</button><span class="muted">第 ${i+1} / ${list.length} 題${quiz?'':'・一次就答對 '+first+' 題'}</span></div>
+    </div><div>${padHTML(['7','8','9','4','5','6','1','2','3','⌫','0','確定'])}</div></div>`;
+    $('#tt-say',box).onclick=()=>speak(sayQ(q));
+    $$('.dkey',box).forEach(b=>b.onclick=()=>key(b.dataset.k));
+    if(store.set.auto)speak(sayQ(q));
+  }
+  function msg(cls,html){const f=$('#tt-fb',box);if(f)f.innerHTML=`<div class="fb-msg ${cls}">${cls==='ok'?ICON.check:ICON.bulb}<div>${html}</div></div>`;}
+  function refresh(){const b=$('.tt-blank',box);if(!b)return;b.textContent=typed||'？';b.classList.toggle('typed',!!typed);b.classList.remove('bad');}
+  function key(k){if(lock)return;const q=list[i];const ans=q.hide==='b'?q.b:q.a*q.b;
+    if(k==='⌫'){typed=typed.slice(0,-1);refresh();return;}
+    if(k==='確定'||k==='OK'){if(typed)check();return;}
+    if(typed.length>=2)return;typed+=k;refresh();if(typed.length>=String(ans).length)setTimeout(check,180);}
+  function next(){i++;typed='';tries=0;lock=false;i<list.length?draw():finish();}
+  function check(){if(lock)return;const q=list[i];const c=q.a*q.b;const ans=q.hide==='b'?q.b:c;const bl=$('.tt-blank',box);
+    if(Number(typed)===ans){lock=true;if(tries===0)first++;bl.classList.add('ok');msg('ok',pickMsg(OK_MSG));if(quiz){streak++;if(streak%3===0){setTimeout(()=>{if(box.isConnected)asReward(streak,()=>{if(box.isConnected)next();});},450);return;}}setTimeout(next,quiz?450:650);return;}
+    tries++;bl.classList.add('bad');
+    if(quiz){lock=true;streak=0;wrong.push(q);msg('bad',`答案是 <b>${q.a} × ${q.b} = ${c}</b>`);setTimeout(next,1500);return;}
+    if(tries===1)msg('bad','再想一想。'+(q.hide==='b'?`${q.a} 一個一個加上去，加幾次會變成 ${c}？`:q.b>1?`提示：${q.a} × ${q.b-1} = ${q.a*(q.b-1)}，再加 ${q.a}。`:`提示：${q.a} × 1 就是 ${q.a}。`));
+    else msg('bad',`答案是 <b>${q.a} × ${q.b} = ${c}</b>，請你自己把它填進去。`);
+    typed='';setTimeout(refresh,500);}
+  function finish(){if(!box.isConnected)return;const D=drillStore();const n=list.length;drillStop();
+    if(quiz){const r=n-wrong.length,last={r,n,t:Date.now(),sel:TT.sel.slice()};if(!D.quiz)D.quiz={best:last,last};D.quiz.last=last;if(r/n>D.quiz.best.r/D.quiz.best.n)D.quiz.best=last;save();
+      const tables=[...new Set(wrong.map(q=>q.a))].sort((x,y)=>x-y);
+      box.innerHTML=`<div class="card stamp narrow"><h2>小測驗結果</h2><div class="score" style="justify-content:center">${r} / ${n}<span class="score-pct">${Math.round(r/n*100)} 分</span></div><p class="muted">用了 ${Math.round((Date.now()-t0)/1000)} 秒</p>
+       ${wrong.length?`<p><b>答錯的題目</b></p><div class="chips" style="justify-content:center">${wrong.map(q=>`<span>${q.a} × ${q.b} = ${q.a*q.b}</span>`).join('')}</div><p class="muted">建議再練習：${tables.map(t=>t+' 的乘法').join('、')}</p>`:'<p class="ok-line">全部答對，太厲害了！</p>'}
+       <div class="row" style="justify-content:center;margin-top:1rem"><button class="btn ghost" type="button" id="tt-again">${ICON.retry}再考一次</button></div></div>`;
+      $('#tt-again').onclick=()=>ttQuizSetup();return;}
+    const pass=first>=n-1;const m=D.tt[TT.n]=D.tt[TT.n]||{};const newly=pass&&!m[TT.mode];if(pass)m[TT.mode]=true;save();
+    const nm=TT_MODES.find(x=>x[0]===TT.mode)[1];const mastered=ttMastered(TT.n);const nextM=TT_STEPS.find(k=>!m[k]);
+    box.innerHTML=`<div class="card stamp narrow">${pass?`<div class="big">${ICON.check}</div><h2>${TT.n} 的乘法・${nm} 過關！</h2>`:`<h2>${TT.n} 的乘法・${nm}</h2>`}
+     <p class="lead">一次就答對 ${first} / ${n} 題。${pass?'':'一次答對 '+(n-1)+' 題以上就過關，再試一次！'}</p>
+     ${mastered&&newly?`<p class="new-rec">${TT.n} 的乘法三關都過了，精熟了！</p>`:''}
+     <div class="row" style="justify-content:center;margin-top:1rem"><button class="btn ghost" type="button" id="tt-again">${ICON.retry}再練一次</button>${nextM?`<button class="btn" type="button" id="tt-next">下一關：${TT_MODES.find(x=>x[0]===nextM)[1]}${ICON.next}</button>`:mastered&&TT.n<9?`<button class="btn" type="button" id="tt-next">換 ${TT.n+1} 的乘法${ICON.next}</button>`:mastered?`<button class="btn" type="button" id="tt-next">去做小測驗${ICON.next}</button>`:''}</div></div>`;
+    $('#tt-again').onclick=()=>viewTimes();const nx=$('#tt-next');if(nx)nx.onclick=()=>{if(nextM)TT.mode=nextM;else if(TT.n<9){TT.n++;TT.mode='seq';}else TT.mode='quiz';viewTimes();};}
+  drillKeys(key);draw();
+}
+
+/* 加減法特訓（依老師原本的「進退位加減特訓站」改編，加上三位數關卡） */
+const AS_NAMES=['','不進退位','加入進位','加入退位','綜合挑戰','三位數挑戰'];
+const AS_W=[null,{addNo:.45,subNo:.45,addCarry:.05,subBorrow:.05},{addNo:.3,subNo:.3,addCarry:.25,subBorrow:.15},{addNo:.2,subNo:.2,addCarry:.3,subBorrow:.3},{addNo:.1,subNo:.1,addCarry:.4,subBorrow:.4},{add3:.5,sub3:.5}];
+const AS_TH=[0,6,14,24,36];
+const AS_GOOD=['答對了，繼續加油！','太棒了！','做得好，保持下去！','正確！你越來越快了','答對囉，很不錯！'],AS_BAD=['別灰心，我們再算一次','差一點點，繼續加油！','沒關係，下一題再挑戰','再試試看，你可以的！'],AS_TIME=['時間到，我們再練習一次','下次再快一點點試試看'];
+const tens=x=>Math.floor(x/10)%10;
+const AS_GEN={
+  addNo(){let a,b,t=0;do{a=ri(10,89);b=ri(10,89);t++;}while(t<400&&!((a%10)+(b%10)<=9&&tens(a)+tens(b)<=9));return{a,b,op:'+',ans:a+b,type:'addNo'};},
+  addCarry(){let a,b,t=0;do{a=ri(10,89);b=ri(10,89);t++;}while(t<400&&!((a%10)+(b%10)>=10&&tens(a)+tens(b)+1<=9));return{a,b,op:'+',ans:a+b,type:'addCarry'};},
+  subNo(){let a,b,t=0;do{a=ri(10,99);b=ri(10,98);t++;}while(t<400&&!(a>b&&(a%10)>=(b%10)&&tens(a)>=tens(b)));return{a,b,op:'−',ans:a-b,type:'subNo'};},
+  subBorrow(){let a,b,t=0;do{a=ri(10,99);b=ri(10,98);t++;}while(t<400&&!(a>b&&(a%10)<(b%10)&&tens(a)>tens(b)));return{a,b,op:'−',ans:a-b,type:'subBorrow'};},
+  add3(){let a,b,t=0;do{a=ri(100,899);b=ri(100,899);t++;}while(t<400&&!(a+b<=999&&((a%10)+(b%10)>=10||tens(a)+tens(b)>=10)));return{a,b,op:'+',ans:a+b,type:'add3'};},
+  sub3(){let a,b,t=0;do{a=ri(220,999);b=ri(100,a-100);t++;}while(t<400&&!((a%10)<(b%10)||tens(a)<tens(b)));return{a,b,op:'−',ans:a-b,type:'sub3'};}
+};
+let AS=null;
+function asInit(){const D=drillStore();if(!AS)AS={level:D.as.manual||1,manual:!!D.as.manual,timed:D.as.timed!==false,streak:0,total:0,correct:0,timeSum:0,queue:[],cur:null};}
+function asLevelFor(c){let l=1;for(let i=1;i<AS_TH.length;i++)if(c>=AS_TH[i])l=i+1;return Math.min(l,5);}
+function asType(){const w=AS_W[AS.level];let r=Math.random(),acc=0;for(const k in w){acc+=w[k];if(r<=acc)return k;}return Object.keys(w)[0];}
+function asFill(){while(AS.queue.length<5)AS.queue.push(AS_GEN[asType()]());}
+function viewAddSub(){
+  asInit();const D=drillStore();
+  V().innerHTML=`<div class="drill">
+   <div class="crumbs"><button class="link" type="button" data-go="">${ICON.back}總目錄</button></div>
+   <h1>加減法特訓</h1><p class="lead">從個位開始，一格一格往左填答案。連續答對愈多，關卡愈升級！上面的小框可以點一下，記下進位或借位。</p>
+   <div class="as-levels" role="group" aria-label="選關卡"><button type="button" class="as-lv${!AS.manual?' on':''}" data-l="auto">自動升級</button>${[1,2,3,4,5].map(l=>`<button type="button" class="as-lv${AS.manual&&AS.level===l?' on':''}" data-l="${l}">關卡 ${l}・${AS_NAMES[l]}</button>`).join('')}<button type="button" class="as-lv tm${AS.timed?' on':''}" id="as-timed" aria-pressed="${AS.timed}">⏱ 限時 30 秒（${AS.timed?'開':'關'}）</button></div>
+   <div class="as-stats"><div><b id="as-l">Lv.${AS.level}</b><small>目前關卡</small></div><div><b id="as-s">${AS.streak}</b><small>連續答對</small></div><div><b id="as-a">–</b><small>正確率</small></div><div><b id="as-t">–</b><small>平均秒數</small></div></div>
+   <div class="split"><div class="card"><div class="as-timer"><div class="as-track"><div class="as-fill" id="as-fill"></div></div><span class="muted" id="as-num"></span></div>
+     <div id="as-board"></div><div id="as-fb" aria-live="polite"></div>
+     <div class="row" style="justify-content:space-between;margin-top:.6rem"><span class="muted">最佳連續答對：<b id="as-best">${D.as.best||0}</b> 題</span><button class="link" type="button" id="as-skip">換新的一題</button></div></div>
+     <div>${padHTML(['7','8','9','4','5','6','1','2','3','⌫','0','⏭'])}</div></div></div>`;
+  bindGo(V());
+  $$('.as-lv[data-l]').forEach(b=>b.onclick=()=>{const v=b.dataset.l;if(v==='auto'){AS.manual=false;AS.level=asLevelFor(AS.correct);D.as.manual=0;}else{AS.manual=true;AS.level=+v;D.as.manual=AS.level;}save();AS.queue=[];drillStop();viewAddSub();});
+  $('#as-timed').onclick=()=>{AS.timed=!AS.timed;D.as.timed=AS.timed;save();drillStop();viewAddSub();};
+  $('#as-skip').onclick=()=>asSkip();
+  $$('.dkey').forEach(b=>b.onclick=()=>asKey(b.dataset.k));
+  drillKeys(k=>k==='OK'?asSubmit():asKey(k));
+  asStats();asNext();
+}
+function asStats(){const D=drillStore();const s=$('#as-s');if(!s)return;s.textContent=AS.streak;$('#as-l').textContent='Lv.'+AS.level;$('#as-a').textContent=AS.total?Math.round(AS.correct/AS.total*100)+'%':'–';$('#as-t').textContent=AS.total?(AS.timeSum/AS.total).toFixed(1)+'s':'–';$('#as-best').textContent=D.as.best||0;}
+function asNext(){if(!$('#as-board'))return;asFill();AS.cur=AS.queue.shift();asFill();const p=AS.cur;p.len=String(p.ans).length;p.dig=Array(p.len).fill(null);p.pos=0;p.lock=false;asBoard();$('#as-fb').innerHTML='';asTimer();}
+function asBoard(){const p=AS.cur;const cols=Math.max(String(p.a).length,String(p.b).length,p.len);const pad=(n)=>{const d=String(n).split('');return Array(cols-d.length).fill('').concat(d);};
+  let h=`<div class="as-board" style="grid-template-columns:2.4rem repeat(${cols},3.2rem)"><div></div>${Array.from({length:cols},(_,c)=>`<div class="c"><button type="button" class="as-note" data-c="${c}" aria-label="記進位或借位"></button></div>`).join('')}`;
+  h+=`<div></div>${pad(p.a).map(d=>`<div class="c">${d}</div>`).join('')}<div class="c op">${p.op}</div>${pad(p.b).map(d=>`<div class="c">${d}</div>`).join('')}<div class="rule"></div><div></div>`;
+  for(let c=0;c<cols;c++){const pos=cols-1-c;h+=pos<p.len?`<div class="c"><div class="as-ans${pos===p.pos&&!p.lock?' act':''}${p.res?' '+p.res:''}" data-p="${pos}">${p.dig[pos]??''}</div></div>`:'<div></div>';}
+  $('#as-board').innerHTML=h+'</div>';
+  $$('.as-note').forEach(b=>b.onclick=()=>{b.textContent=b.textContent?'':'1';});
+  $$('.as-ans').forEach(b=>b.onclick=()=>{if(p.lock)return;p.pos=+b.dataset.p;asBoard();});
+  if(store.set.auto&&!p.said){p.said=true;speak(`${p.a} ${p.op==='+'?'加':'減'} ${p.b} 等於多少`);}
+}
+function asKey(k){const p=AS.cur;if(!p||p.lock)return;
+  if(k==='⏭'){asSkip();return;}
+  if(k==='⌫'){if(p.dig[p.pos]!=null)p.dig[p.pos]=null;else if(p.pos>0){p.pos--;p.dig[p.pos]=null;}asBoard();return;}
+  p.dig[p.pos]=k;const empty=p.dig.findIndex(d=>d==null);if(empty<0){asBoard();asSubmit();return;}p.pos=p.pos<p.len-1&&p.dig[p.pos+1]==null?p.pos+1:empty;asBoard();}
+function asTimer(){clearInterval(DR.timer);const fill=$('#as-fill'),num=$('#as-num');const p=AS.cur;p.t0=Date.now();fill.classList.remove('warn','danger');
+  if(!AS.timed){fill.style.width='100%';num.textContent='0s';DR.timer=setInterval(()=>{if(!$('#as-num'))return drillStop();num.textContent=Math.floor((Date.now()-p.t0)/1000)+'s';},250);return;}
+  num.textContent='30s';fill.style.width='100%';
+  DR.timer=setInterval(()=>{if(!$('#as-fill'))return drillStop();const rem=30-(Date.now()-p.t0)/1000;if(rem<=0){clearInterval(DR.timer);fill.style.width='0%';asResult(false,30,true);return;}const pc=rem/30;fill.style.width=pc*100+'%';num.textContent=Math.ceil(rem)+'s';fill.classList.toggle('warn',pc<=.5&&pc>.2);fill.classList.toggle('danger',pc<=.2);},100);}
+function asSubmit(){const p=AS.cur;if(!p||p.lock||p.dig.some(d=>d==null))return;clearInterval(DR.timer);const typed=Number(p.dig.slice().reverse().join(''));asResult(typed===p.ans,(Date.now()-p.t0)/1000,false);}
+function asSkip(){const p=AS.cur;if(!p||p.lock)return;clearInterval(DR.timer);p.lock=true;asBoard();asMsg('info','換一題新的。');setTimeout(asNext,500);}
+function asMsg(cls,html){const f=$('#as-fb');if(f)f.innerHTML=`<div class="fb-msg ${cls}">${cls==='ok'?ICON.check:ICON.bulb}<div>${html}</div></div>`;}
+function asResult(ok,sec,timeout){const p=AS.cur,D=drillStore();if(p.lock)return;p.lock=true;AS.total++;AS.timeSum+=AS.timed?Math.min(sec,30):sec;
+  if(ok){AS.correct++;AS.streak++;if(AS.streak>(D.as.best||0))D.as.best=AS.streak;p.res='ok';asBoard();asMsg('ok',AS_GOOD[ri(0,AS_GOOD.length-1)]);}
+  else{AS.streak=0;p.dig=String(p.ans).split('').reverse();p.res='bad';asBoard();asMsg('bad',`正確答案：${p.a} ${p.op} ${p.b} = ${p.ans}・${(timeout?AS_TIME:AS_BAD)[ri(0,1)]}`);AS.queue.splice(Math.min(AS.queue.length,ri(2,4)),0,AS_GEN[p.type]());}
+  if(!AS.manual){const nl=asLevelFor(AS.correct);if(nl>AS.level){AS.level=nl;AS.queue=[];asMsg('ok',`升級囉！進入第 ${nl} 關・${AS_NAMES[nl]}`);}}
+  D.as.lv=Math.max(D.as.lv||1,AS.level);save();asStats();const go=()=>{if($('#as-board'))asNext();};if(ok&&AS.streak>0&&AS.streak%3===0)setTimeout(()=>asReward(AS.streak,go),500);else setTimeout(go,ok?900:1800);}
+
+/* 連續答對 3 題的獎勵畫面 */
+function asChime(){if(store.set.calm)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ac=asChime.ac||(asChime.ac=new C());[523,659,784,1047].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;const t0=ac.currentTime+i*.11;g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(.18,t0+.02);g.gain.exponentialRampToValueAtTime(.001,t0+.35);o.connect(g).connect(ac.destination);o.start(t0);o.stop(t0+.4);});}catch(e){}}
+function asReward(n,done){
+  const words=n>=9?['你是計算高手！','停不下來了！']:n>=6?['火力全開！','越算越快了！']:['太厲害了！','繼續保持！'];
+  const w=h(`<div class="rw-wrap" role="dialog" aria-label="獎勵"><div class="rw-card"><div class="rw-stars"><span>★</span><span>★</span><span>★</span></div><div class="rw-medal">${medalSVG(true)}</div><h2>連續答對 ${n} 題！</h2><p class="lead">${words[0]}${words[1]}</p><button type="button" class="btn">繼續挑戰${ICON.next}</button></div></div>`);
+  let closed=false;const close=()=>{if(closed)return;closed=true;w.remove();done&&done();};
+  $('button',w).onclick=close;w.addEventListener('click',e=>{if(e.target===w)close();});
+  document.body.append(w);asChime();speak(`連續答對 ${n} 題，${words[0]}`);setTimeout(close,2600);$('button',w).focus({preventScroll:true});
+}
+
+/* 學習紀錄裡的練習遊戲成績 */function drillProgress(){const D=drillStore();const pc=r=>Math.round(r.r/r.n*100);
+  return `<h2 style="margin:.2rem 0 .6rem">計算練功房</h2><div class="card drill-prog">
+   <div><b>九九乘法精熟</b><div class="tt-mini">${TABLES.map(n=>{const m=D.tt[n]||{};const c=TT_STEPS.filter(k=>m[k]).length;return `<span class="${c===TT_STEPS.length?'master':c?'doing':''}">${n}<small>${c===TT_STEPS.length?'精熟':c+' / '+TT_STEPS.length}</small></span>`;}).join('')}</div>
+   <span class="muted">${D.quiz?`小測驗　最近一次 ${D.quiz.last.r} / ${D.quiz.last.n}（${pc(D.quiz.last)} 分）・最佳 ${D.quiz.best.r} / ${D.quiz.best.n}（${pc(D.quiz.best)} 分）`:'還沒做過小測驗'}</span></div>
+   <div><b>加減法特訓</b><br><span class="muted">最佳連續答對 ${D.as.best||0} 題・最高到第 ${D.as.lv||1} 關（${AS_NAMES[D.as.lv||1]}）</span></div>
+   <div class="row"><button class="btn ghost small" type="button" data-go="times">去練九九乘法</button><button class="btn ghost small" type="button" data-go="addsub">去做加減特訓</button></div></div>`;}
 
 /* ---------- home: 繼續學習 button and folded unit groups ---------- */
 const GROUPS=[[0,4],[5,8]];
@@ -1575,7 +1886,7 @@ function viewHome(){
       <p class="lead">康軒六上 9 個單元。每一關分成四小步，一步一步來，答錯可以一直重來。</p></div>
     <div class="ring" aria-label="全冊完成 ${tot}%"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" style="stroke:var(--grid)" stroke-width="10"/><circle cx="50" cy="50" r="44" fill="none" style="stroke:var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*tot/100} ${C}"/></svg><div class="pct"><div>${tot}%<small>全冊完成</small></div></div></div>
   </section>
-  ${continueBlock()}
+  ${continueBlock()}${starSummary()}
   <div class="howto">
     <div><b>我看</b><span>點「？」一步一步看例題</span></div>
     <div><b>我懂</b><span>選一選，確認懂了</span></div>
@@ -1592,6 +1903,7 @@ function viewHome(){
         <div class="meta"><span>${p===0?'還沒開始':p===100?'全部完成':'完成 '+p+'%'}</span><span>${bb?`基礎 ${bb}`:''}${bb&&ba?'・':''}${ba?`進階 ${ba}`:''}</span></div>
         <div class="row"><button class="btn" type="button" data-go="u${u+1}">互動教學</button><button class="btn ghost" type="button" data-go="u${u+1}-quiz">形成性評量</button></div>
       </div></article>`;})}
+  ${drillCards()}
   <p class="note">進度只存在這台 iPad（或電腦）的瀏覽器裡，下次打開會接著做。右上角「設定」可以開自動朗讀、減敏模式、大字和螢幕數字鍵盤。每一題旁邊的喇叭按鈕都可以唸題目。</p>`;
   bindGo(V());bindHome();
 }
@@ -1605,7 +1917,7 @@ function viewUnit(u){
    <div class="levels">${un.levels.map((L,l)=>{const c=levelDoneCount(u,l),st=stagesOf(u,l);return`
      <button class="lvl ${c===4?'done':''} ${l===nextL?'next':''}" type="button" data-go="u${u+1}-l${l+1}">
        <span class="lvl-no">${c===4?ICON.check.replace('<svg','<svg width="22" height="22"'):l+1}</span>
-       <span>${l===nextL?'<span class="tag">建議下一關</span>':''}<span class="lvl-t">第 ${l+1} 關　${L.title}</span><br><span class="lvl-s">${L.sub}</span></span>
+       <span>${l===nextL?'<span class="tag">建議下一關</span>':''}<span class="lvl-t">第 ${l+1} 關　${L.title}</span><br><span class="lvl-s">${L.sub}</span>${starsOf(u,l,store.mode==='a')?`<span class="lvl-stars">${starsHTML(starsOf(u,l,store.mode==='a'))}</span>`:''}</span>
        <span class="pips" aria-label="完成 ${c} 步">${['look','know','do','can'].map(s=>`<i class="${st[s]?'on':''}"></i>`).join('')}</span>
      </button>`;}).join('')}
      <button class="lvl" type="button" data-go="u${u+1}-quiz"><span class="lvl-no">✎</span><span><span class="lvl-t">形成性評量</span><br><span class="lvl-s">基礎卷・進階卷${store.q[u+'b']?`（基礎最佳 ${store.q[u+'b']}）`:''}${store.q[u+'a']?`（進階最佳 ${store.q[u+'a']}）`:''}</span></span><span></span></button>
@@ -1658,7 +1970,7 @@ function stLook(box,u,l,L,goStage){
   /* 重點: the student reads it aloud once; "我唸完了" unlocks after a short wait, then 我懂 opens */
   function showKey(){
     nb.hidden=true;pb.style.visibility='hidden';
-    kb.innerHTML=`<div class="keypt"><b class="lab">重點：請大聲唸一遍</b><div class="key-txt">${X.key}</div>
+    kb.innerHTML=`<div class="keypt"><b class="lab">重點：請自己唸一遍</b><div class="key-txt">${X.key}</div>
       <div class="read-row"><button class="btn ghost" type="button" id="kl">${ICON.say}先聽一次</button><button class="btn read-btn" type="button" id="kr" disabled></button></div></div>`;
     const kt=$('.key-txt',kb),kr=$('#kr',kb);
     $('#kl',kb).onclick=()=>speak(toSpeech(kt));
@@ -1755,12 +2067,13 @@ function stCan(box,u,l,L,goStage){
   const N=3;let n=0;const stars=[];const seenC=new Set();
   function show(){
     box.innerHTML='';
-    const top=h(`<div class="stars" aria-label="已經拿到 ${stars.length} 顆星">${Array.from({length:N},(_,j)=>ICON.star.replace('<svg',`<svg class="${j<stars.length?'on':''}"`)).join('')}</div>`);
+    const top=h(`<div class="stars" aria-label="一次就答對 ${stars.filter(Boolean).length} 題">${Array.from({length:N},(_,j)=>ICON.star.replace('<svg',`<svg class="${stars[j]?'on':''}"`)).join('')}</div>`);
     box.append(top);
     if(n>=N){
       markStage(u,l,'can');
+      const SR=awardStars(u,l,stars,typeof adv!=='undefined'&&!!adv);
       const hasNext=l+1<U[u].levels.length;
-      const st=h(`<div class="card stamp narrow"><div class="big">${ICON.check}</div><h2>第 ${l+1} 關過關了！</h2><p class="lead">${stars.every(Boolean)?'三題都一次就答對，太厲害了！':'你很認真，每一題都完成了。'}</p><div class="row" style="justify-content:center;margin-top:1rem"></div></div>`);
+      const st=h(`<div class="card stamp narrow"><div class="big">${ICON.check}</div><h2>第 ${l+1} 關過關了！</h2>${starResult(SR)}<div class="row" style="justify-content:center;margin-top:1rem"></div></div>`);
       const row=$('.row',st);
       const again=h(`<button class="btn ghost" type="button">${ICON.retry}再練 3 題</button>`);again.onclick=()=>stCan(box,u,l,L,goStage);
       const nx=h(`<button class="btn" type="button">${hasNext?`下一關：${U[u].levels[l+1].title}`:'去做形成性評量'}${ICON.next}</button>`);
@@ -1842,7 +2155,7 @@ function viewQuiz(u){
       if(!ok)$('.qbody',el).append(h(`<div class="fb-msg bad">${ICON.bulb}<div>正確答案：${ansText(it.ans)}</div></div>`));});
     const sc=`${right}/${W.length}`;const kk=u+diff;const prev=store.q[kk];
     if(!prev||right>parseInt(prev))store.q[kk]=sc;store.qh=store.qh||{};(store.qh[u]=store.qh[u]||[]).unshift({t:Date.now(),d:diff,v:ver,r:right,n:W.length,per:per.map(x=>[x.r,x.t])});store.qh[u]=store.qh[u].slice(0,10);save();
-    $('#qres').innerHTML=`<div class="card" style="margin-bottom:1rem"><div class="score">${right} / ${W.length}</div><div class="lead">${right===W.length?'全部答對！':'答錯的題目，可以回到下面建議的關卡再練習。'}</div>
+    $('#qres').innerHTML=`<div class="card" style="margin-bottom:1rem"><div class="score">${right} / ${W.length}<span class="score-pct">${Math.round(right/W.length*100)} 分</span></div><div class="lead">${right===W.length?'全部答對！':'答錯的題目，可以回到下面建議的關卡再練習。'}</div>
       <table class="key"><thead><tr><th>關卡</th><th>答對</th><th>建議</th></tr></thead><tbody>${un.levels.map((lv,li)=>`<tr><td>第 ${li+1} 關　${lv.title}</td><td>${per[li].r} / ${per[li].t}</td><td>${per[li].r===per[li].t?'很好':`<button class="link" type="button" data-go="u${u+1}-l${li+1}">回去練習 ${ICON.next}</button>`}</td></tr>`).join('')}</tbody></table></div>`;
     bindGo($('#qres'));
     $('#qsubmit').disabled=true;window.scrollTo({top:0,behavior:store.set.calm?'auto':'smooth'});
