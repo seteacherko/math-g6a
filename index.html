@@ -312,6 +312,20 @@ table.key th{background:var(--accent-soft)}
 .ok-line{color:var(--ok);font-weight:700;font-size:.9rem}
 @media (min-width:900px){.prog-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.prog-sum{grid-template-columns:1fr}.prog-row{grid-template-columns:1fr}}
+/* 繼續學習 + folded groups */
+.cont-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin:.4rem 0 1.2rem}
+.cont-btn{border:0;background:var(--u);color:#fff;border-radius:16px;padding:.9rem 1.5rem;font-family:var(--display);font-weight:700;font-size:1.35rem;min-height:3.6rem;box-shadow:0 3px 0 color-mix(in srgb,var(--u) 55%,#000);text-align:left;max-width:100%}
+.cont-btn:active{transform:translateY(2px);box-shadow:none}
+.cont-lab{opacity:.92}
+.cont-done{background:var(--ok-bg);color:var(--ok);font-weight:700;border-radius:14px;padding:.8rem 1.1rem}
+details.grp{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:1rem}
+details.grp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.3rem;min-height:4rem}
+details.grp>summary::-webkit-details-marker{display:none}
+details.grp>summary::before{content:'▸';color:var(--accent);font-size:1.1rem;transition:transform .2s;margin-right:-.4rem}
+details.grp[open]>summary::before{transform:rotate(90deg)}
+.grp-t{font-family:var(--display);font-weight:700;font-size:1.55rem;flex:1}
+.grp-n{color:var(--mute);font-size:.9rem;white-space:nowrap}
+details.grp>.units{padding:0 1.1rem 1.1rem}
 /* iPad landscape and other wide screens */
 @media (min-width:900px){
   .split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem;align-items:start}
@@ -1521,7 +1535,34 @@ function viewProgress(){
         <button type="button" class="btn ghost small" data-go="u${u+1}-quiz">${last?'再做一次評量':'去做評量'}</button>
       </div></article>`;}).join('')}</div>
   <p class="note">「需要再練習」是依照最近一次評量答錯的題目，對應到的關卡。</p>`;
-  bindGo(V());
+  bindGo(V());bindHome();
+}
+
+/* ---------- home: 繼續學習 button and folded unit groups ---------- */
+const GROUPS=[[0,4],[5,8]];
+const isDoneLv=(u,l)=>typeof levelDone==='function'?levelDone(u,l):levelDoneCount(u,l)===4;
+function continueTarget(){
+  const L=store.last;if(L&&U[L[0]]&&U[L[0]].levels[L[1]]&&!isDoneLv(L[0],L[1]))return{u:L[0],l:L[1],resume:true};
+  for(let u=0;u<U.length;u++)for(let l=0;l<U[u].levels.length;l++)if(!isDoneLv(u,l))return{u,l,resume:!!L};
+  return null;
+}
+function continueBlock(){
+  const c=continueTarget();
+  if(!c)return '<div class="cont-row"><div class="cont-done">全部的關卡都完成了，太厲害了！可以到「學習紀錄」看看評量結果。</div></div>';
+  const lv=U[c.u].levels[c.l];
+  return '<div class="cont-row"><button class="cont-btn" type="button" data-go="u'+(c.u+1)+'-l'+(c.l+1)+'" style="--u:var(--u'+(c.u+1)+')"><span class="cont-lab">'+(c.resume?'繼續學習':'開始學習')+'：</span>第 '+(c.u+1)+' 單元 第 '+(c.l+1)+' 關〈'+lv.title+'〉</button><span class="cont-say"></span></div>';
+}
+function homeGroups(tile){
+  const c=continueTarget();let open=null;try{open=store.grpOpen||null;}catch(e){}
+  return GROUPS.map((gr,gi)=>{const [a,b]=gr;const us=[];for(let u=a;u<=b&&u<U.length;u++)us.push(u);
+    const pct=Math.round(us.reduce((s,u)=>s+unitPct(u),0)/us.length);
+    const isOpen=(c?c.u>=a&&c.u<=b:gi===0)||(open?open.includes(gi):false);
+    return '<details class="grp" data-g="'+gi+'"'+(isOpen?' open':'')+'><summary><span class="grp-t">第 '+(a+1)+'～'+(b+1)+' 單元</span><span class="grp-n">'+us.length+' 單元・完成 '+pct+'%</span></summary><div class="units">'+us.map(u=>tile(U[u],u)).join('')+'</div></details>';}).join('');
+}
+function bindHome(){
+  const sp=document.querySelector('.cont-say');const btn=document.querySelector('.cont-btn');if(sp&&btn)sp.append(sayBtn(btn));
+  const h1=document.querySelector('.hero h1');if(h1&&!h1.querySelector('.say')){const s=sayBtn(h1);s.style.cssText='display:inline-grid;vertical-align:middle;margin-left:.6rem;width:2.4rem;height:2.4rem';h1.append(s);}
+  document.querySelectorAll('details.grp>summary').forEach(s=>s.addEventListener('click',()=>setTimeout(()=>{store.grpOpen=[...document.querySelectorAll('details.grp')].filter(x=>x.open).map(x=>+x.dataset.g);save();},0)));
 }
 
 /* ---------- home ---------- */
@@ -1534,13 +1575,14 @@ function viewHome(){
       <p class="lead">康軒六上 9 個單元。每一關分成四小步，一步一步來，答錯可以一直重來。</p></div>
     <div class="ring" aria-label="全冊完成 ${tot}%"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" style="stroke:var(--grid)" stroke-width="10"/><circle cx="50" cy="50" r="44" fill="none" style="stroke:var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*tot/100} ${C}"/></svg><div class="pct"><div>${tot}%<small>全冊完成</small></div></div></div>
   </section>
+  ${continueBlock()}
   <div class="howto">
     <div><b>我看</b><span>點「？」一步一步看例題</span></div>
     <div><b>我懂</b><span>選一選，確認懂了</span></div>
     <div><b>我做</b><span>跟著步驟一格一格填</span></div>
     <div><b>我會</b><span>自己做 3 題拿星星</span></div>
   </div>
-  <div class="units">${U.map((un,u)=>{const p=unitPct(u),bb=store.q[u+'b'],ba=store.q[u+'a'];return`
+  ${homeGroups((un,u)=>{const p=unitPct(u),bb=store.q[u+'b'],ba=store.q[u+'a'];return`
     <article class="unit" style="${uvar(u)}">
       <div class="unit-head"><span class="unit-no">${u+1}</span><span class="unit-name">${un.name}</span></div>
       <div class="unit-body">
@@ -1549,10 +1591,9 @@ function viewHome(){
         <div class="bar"><i style="width:${p}%"></i></div>
         <div class="meta"><span>${p===0?'還沒開始':p===100?'全部完成':'完成 '+p+'%'}</span><span>${bb?`基礎 ${bb}`:''}${bb&&ba?'・':''}${ba?`進階 ${ba}`:''}</span></div>
         <div class="row"><button class="btn" type="button" data-go="u${u+1}">互動教學</button><button class="btn ghost" type="button" data-go="u${u+1}-quiz">形成性評量</button></div>
-      </div></article>`;}).join('')}
-  </div>
+      </div></article>`;})}
   <p class="note">進度只存在這台 iPad（或電腦）的瀏覽器裡，下次打開會接著做。右上角「設定」可以開自動朗讀、減敏模式、大字和螢幕數字鍵盤。每一題旁邊的喇叭按鈕都可以唸題目。</p>`;
-  bindGo(V());
+  bindGo(V());bindHome();
 }
 
 /* ---------- unit map ---------- */
@@ -1577,6 +1618,7 @@ function viewUnit(u){
 /* ---------- level ---------- */
 const STG=[['look','我看','看例題'],['know','我懂','選一選'],['do','我做','跟著做'],['can','我會','自己做']];
 function viewLevel(u,l){
+  store.last=[u,l];save();
   const L=U[u].levels[l],key=lkey(u,l),st=stagesOf(u,l);
   let cur=stageSel[key]||(STG.find(s=>!st[s[0]])||STG[0])[0];
   if(!st.look)cur='look'; /* 我懂、我做、我會 open only after 我看 (including reading the 重點) */
