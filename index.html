@@ -1687,7 +1687,7 @@ const ttMastered=n=>{const m=drillStore().tt[n]||{};return TT_STEPS.every(k=>m[k
 function drillCards(){const D=drillStore();const m=TABLES.filter(ttMastered).length;
   return `<h2 class="drill-h">計算練功房</h2><div class="drill-cards">
   <button class="drill-card" type="button" data-go="times"><span class="dc-ic">×</span><span><b>九九乘法精熟</b><small>順序・亂序・乘數挖空・小測驗<br>已精熟 ${m} / 8 個乘法表</small></span></button>
-  <button class="drill-card" type="button" data-go="addsub"><span class="dc-ic">±</span><span><b>加減法特訓</b><small>不進退位 → 進位 → 退位 → 綜合 → 三位數<br>最佳連續答對 ${D.as.best||0} 題</small></span></button><a class="drill-card" href="../math-ten/"><span class="dc-ic">10</span><span><b>十的分解合成</b><small>用十格板分一分、合一合<br>10 以內的加減，不用數手指</small></span></a></div>`;}
+  <button class="drill-card" type="button" data-go="addsub"><span class="dc-ic">±</span><span><b>加減法特訓</b><small>不進退位 → 進位 → 退位 → 綜合 → 三位數<br>最佳連續答對 ${D.as.best||0} 題</small></span></button><a class="drill-card" href="../MATH-TEN/"><span class="dc-ic">10</span><span><b>十的分解合成</b><small>用十格板分一分、合一合<br>10 以內的加減，不用數手指</small></span></a></div>`;}
 
 /* 九九乘法精熟 */
 const TT_MODES=[['seq','順序'],['rand','亂序'],['gap','乘數挖空'],['quiz','小測驗']];
