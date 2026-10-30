@@ -1452,8 +1452,8 @@ function toSpeech(el){
   return c.textContent.replace(/×/g,'乘').replace(/÷/g,'除以').replace(/＝|=/g,'等於').replace(/≈/g,'大約是').replace(/−/g,'減').replace(/\+|＋/g,'加').replace(/→/g,'變成')
     .replace(/\s:\s/g,'比').replace(/□|\?/g,'多少').replace(/°/g,'度').replace(/公里\/時/g,'公里每小時').replace(/公尺\/分/g,'公尺每分鐘').replace(/公尺\/秒/g,'公尺每秒').replace(/\s+/g,' ');
 }
-function speak(t){
-  try{const s=window.speechSynthesis;if(!s)return;s.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='zh-TW';u.rate=.82;
+/* 破音字：只改「念出來的聲音」，用同音字讓語音照台灣讀法念（畫面上的字不變） */const PRON=[[/((?:^|[^因餘合除概倍分小整位質個]))數(?=一數|到|過|數看|錯|漏|出來|一下|看看|清楚)/g,'$1暑'],[/暑一數/g,'暑一暑'],[/暑數看/g,'暑暑看'],[/(接著|怎麼|往下|往上|往前|往後|著|再|先|就|要|只|倒|開始|重複|重新|從頭|一個一個|兩個兩個|五個五個|十個十個|左邊|右邊|哪邊|這邊|那邊|一起|自己|可以|會|能|來|去|跳|請|指著)數(?![字學量線列])/g,'$1暑'],[/(因|餘|合|除|概|倍|分|小|整|位|質|個|次|奇|偶|加|減)數/g,'$1樹'],[/數(?=列)/g,'樹'],[/評量/g,'評良'],[/((?:^|[^數容重水總質能流音考測力雨產]))量(?=一量|長度|到|了|出|看看|東西|桌子|同一|一下|家|一個)/g,'$1良'],[/良一量/g,'良一良'],[/(尺|積木|紋針|開始|來|再|先|東西|接一個|大的|短的)量/g,'$1良'],[/從重到輕/g,'從眾到輕'],[/長(?=方形|方體)/g,'常'],[/只(?=有)/g,'止'],[/幾(?=份|下|就|又|還|都|張|格就)/g,'己'],[/塊地/g,'塊弟'],[/從大到小/g,'從大的到小的'],[/(張|算|看)得(?=比較|對|出)/g,'$1的'],[/(基礎|進階|交|試)卷/g,'$1倦'],[/曲線/g,'屈線'],[/乘/g,'成'],[/差/g,'插'],[/教學/g,'叫學'],[/哪裡都/g,'哪裡兜'],[/倒出/g,'到出'],[/((?:^|[^角的之]))和(?!差積商|插積商|不變|除以|[，。、？！：；）」]|$)/g,'$1漢']];function pron(t){t=String(t);PRON.forEach(([r,x])=>{t=t.replace(r,x);});return t;}function speak(t){
+  try{const s=window.speechSynthesis;if(!s)return;s.cancel();const u=new SpeechSynthesisUtterance(pron(t));u.lang='zh-TW';u.rate=.82;
     const vs=s.getVoices();const v=vs.find(v=>/zh[-_]TW/i.test(v.lang))||vs.find(v=>/^zh/i.test(v.lang));if(v)u.voice=v;s.speak(u);}catch(e){}
 }
 function sayBtn(target){const b=h(`<button class="say no-say" type="button" aria-label="唸給我聽">${ICON.say}</button>`);b.onclick=()=>speak(toSpeech(typeof target==='function'?target():target));return b;}/* 報讀：每個提示框、每個文字選項旁邊自動加喇叭（按了只唸，不會選答案） */function sayHook(root){root.querySelectorAll('.fb-msg:not([data-say])').forEach(m=>{m.dataset.say=1;const t=m.querySelector(':scope>div');if(!t||!t.textContent.trim())return;const b=sayBtn(t);b.classList.add('fb-say');m.append(b);});root.querySelectorAll('.choices .opt:not([data-say])').forEach(o=>{o.dataset.say=1;if(o.parentElement.classList.contains('opt-wrap'))return;const c=o.cloneNode(true);c.querySelectorAll('svg').forEach(x=>x.remove());if(!c.textContent.trim())return;const w=document.createElement('span');w.className='opt-wrap';o.replaceWith(w);w.append(o);const s=h(`<button class="opt-say no-say" type="button" aria-label="唸這個選項">${ICON.say}</button>`);s.onclick=e=>{e.preventDefault();e.stopPropagation();speak(toSpeech(o));};w.append(s);});}new MutationObserver(()=>sayHook(document.body)).observe(document.body,{childList:true,subtree:true});
@@ -1559,7 +1559,7 @@ function hidePad(){pad.hidden=true;}
 document.addEventListener('focusin',e=>{const b=e.target;if(b.classList&&b.classList.contains('box')&&!b.readOnly){lastBox=b;if(!store.set.pad)return;
   const host=b.closest('.step,.qitem .qbody');if(!host)return;
   const anchor=host.querySelector('.ans');if(anchor&&pad.previousElementSibling!==anchor)anchor.after(pad);
-  pad.querySelector('.go').textContent=b.closest('.step')?'檢查':'下一題';pad.hidden=false;}});
+  pad.querySelector('.go').textContent=b.closest('.step')?'檢查':'寫好了';pad.hidden=false;}});
 document.addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;if(!(a&&a.classList&&a.classList.contains('box')))hidePad();},150));
 pad.addEventListener('pointerdown',e=>e.preventDefault());
 pad.addEventListener('mousedown',e=>e.preventDefault());
@@ -1568,7 +1568,7 @@ pad.addEventListener('click',e=>{
   const all=$$('.box').filter(b=>!b.readOnly);const i=all.indexOf(lastBox);
   if(k==='del')lastBox.value=lastBox.value.slice(0,-1);
   else if(k==='next'){if(all[i+1])all[i+1].focus();return;}
-  else if(k==='go'){const btn=lastBox.closest('.step')?.querySelector('[data-role="check"]');if(btn){btn.click();return;}const nxt=all.slice(i+1).find(b=>!b.closest('.qitem')||b.closest('.qitem')!==lastBox.closest('.qitem'));if(nxt)nxt.focus();else hidePad();return;}
+  else if(k==='go'){const btn=lastBox.closest('.step')?.querySelector('[data-role="check"]');if(btn){btn.click();return;}/* 評量：只收起鍵盤，不跳到下一題 */lastBox.blur();hidePad();return;}
   else{if(k==='.'&&lastBox.value.includes('.'))return;if(lastBox.value.length>=8)return;lastBox.value+=k;}
   lastBox.classList.remove('bad');lastBox.focus({preventScroll:true});
 });
