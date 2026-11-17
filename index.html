@@ -445,6 +445,15 @@ details.grp>.units{padding:0 1.1rem 1.1rem}
   .lvl .pips{grid-column:2}
   .clue-t{padding-left:.8rem}
 }
+.clue .tap-me{display:none}
+.clue.ready{border-style:solid;border-color:var(--accent);cursor:pointer;color:var(--ink);animation:breathe 1.8s ease-in-out infinite}
+.clue.ready .n{border-color:var(--accent);color:var(--accent)}
+.clue.ready .tap-me{display:inline-block;margin-left:auto;background:var(--accent);color:var(--on-accent);border-radius:999px;padding:.15rem .8rem;font-size:.85rem;white-space:nowrap}
+.peek-b.nudge{animation:nudge .45s}
+@keyframes nudge{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+[data-calm] .clue.ready,[data-calm] .peek-b.nudge{animation:none}
+.look-hint-top{margin:0 0 .6rem;display:flex;align-items:center;gap:.4rem}.look-hint-top:empty{display:none}
+.ver-row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}.ver-lab{font-size:.85rem;color:var(--mute);min-width:3.6em}.ver-chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:.25rem .8rem;font-size:.88rem;color:var(--ink)}.ver-chip.done{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card))}.ver-chip.todo{border-style:dashed;color:var(--mute)}
 </style>
 </head>
 <body>
@@ -1452,7 +1461,7 @@ function toSpeech(el){
   return c.textContent.replace(/×/g,'乘').replace(/÷/g,'除以').replace(/＝|=/g,'等於').replace(/≈/g,'大約是').replace(/−/g,'減').replace(/\+|＋/g,'加').replace(/→/g,'變成')
     .replace(/\s:\s/g,'比').replace(/□|\?/g,'多少').replace(/°/g,'度').replace(/公里\/時/g,'公里每小時').replace(/公尺\/分/g,'公尺每分鐘').replace(/公尺\/秒/g,'公尺每秒').replace(/\s+/g,' ');
 }
-/* 破音字：只改「念出來的聲音」，用同音字讓語音照台灣讀法念（畫面上的字不變） */const PRON=[[/((?:^|[^因餘合除概倍分小整位質個]))數(?=一數|到|過|數看|錯|漏|出來|一下|看看|清楚)/g,'$1暑'],[/暑一數/g,'暑一暑'],[/暑數看/g,'暑暑看'],[/(接著|怎麼|往下|往上|往前|往後|著|再|先|就|要|只|倒|開始|重複|重新|從頭|一個一個|兩個兩個|五個五個|十個十個|左邊|右邊|哪邊|這邊|那邊|一起|自己|可以|會|能|來|去|跳|請|指著)數(?![字學量線列])/g,'$1暑'],[/(因|餘|合|除|概|倍|分|小|整|位|質|個|次|奇|偶|加|減)數/g,'$1樹'],[/數(?=列)/g,'樹'],[/評量/g,'評良'],[/((?:^|[^數容重水總質能流音考測力雨產]))量(?=一量|長度|到|了|出|看看|東西|桌子|同一|一下|家|一個)/g,'$1良'],[/良一量/g,'良一良'],[/(尺|積木|紋針|開始|來|再|先|東西|接一個|大的|短的)量/g,'$1良'],[/從重到輕/g,'從眾到輕'],[/長(?=方形|方體)/g,'常'],[/只(?=有)/g,'止'],[/幾(?=份|下|就|又|還|都|張|格就)/g,'己'],[/塊地/g,'塊弟'],[/從大到小/g,'從大的到小的'],[/(張|算|看)得(?=比較|對|出)/g,'$1的'],[/(基礎|進階|交|試)卷/g,'$1倦'],[/曲線/g,'屈線'],[/乘/g,'成'],[/差/g,'插'],[/教學/g,'叫學'],[/哪裡都/g,'哪裡兜'],[/倒出/g,'到出'],[/((?:^|[^角的之]))和(?!差積商|插積商|不變|除以|[，。、？！：；）」]|$)/g,'$1漢']];function pron(t){t=String(t);PRON.forEach(([r,x])=>{t=t.replace(r,x);});return t;}function speak(t){
+/* 破音字：只改「念出來的聲音」，用同音字讓語音照台灣讀法念（畫面上的字不變） */const PRON=[[/((?:^|[^因餘合除概倍分小整位質個]))數(?=一數|到|過|數看|錯|漏|出來|一下|看看|清楚|上去|下去|反了|杯數|甲|乙)/g,'$1暑'],[/暑一數/g,'暑一暑'],[/暑數看/g,'暑暑看'],[/(接著|怎麼|往回|繼續|最後|排一排|一格一格|一種一種|一排一排|一隻一隻|一顆一顆|一根一根|回|多|少|後|往下|往上|往前|往後|著|再|先|就|要|只|倒|開始|重複|重新|從頭|一個一個|兩個兩個|五個五個|十個十個|左邊|右邊|哪邊|這邊|那邊|一起|自己|可以|會|能|來|去|跳|請|指著)數(?![字學量線列])/g,'$1暑'],[/(因|餘|合|除|概|倍|分|小|整|位|質|個|次|奇|偶|加|減)數/g,'$1樹'],[/數(?=列)/g,'樹'],[/評量/g,'評良'],[/((?:^|[^數容重水總質能流音考測力雨產]))量(?=一量|長度|到|了|出|看看|東西|桌子|同一|一下|家|一個)/g,'$1良'],[/良一量/g,'良一良'],[/(尺|積木|紋針|開始|來|再|先|東西|接一個|大的|短的)量/g,'$1良'],[/從重到輕/g,'從眾到輕'],[/長(?=方形|方體)/g,'常'],[/只(?=有)/g,'止'],[/幾(?=份|下|就|又|還|都|張|格就)/g,'己'],[/塊地/g,'塊弟'],[/從大到小/g,'從大的到小的'],[/(張|算|看)得(?=比較|對|出)/g,'$1的'],[/卷/g,'倦'],[/曲線/g,'屈線'],[/乘/g,'成'],[/差/g,'插'],[/教學/g,'叫學'],[/哪裡都/g,'哪裡兜'],[/倒出/g,'到出'],[/((?:^|[^的之]))和(?!差積商|插積商|不變|除以|[，。、？！：；）」]|$)/g,'$1漢'],[/(內角|外角|兩角|角)漢(?=是|為|等於|幾|[，。、？！：；）」]|$)/g,'$1和'],[/兩邊漢(?=短|長|大|小|還)/g,'兩邊和'],[/綜/g,'粽'],[/調(?=成)/g,'條'],[/括號/g,'闊號'],[/留空/g,'留控'],[/點數(?=與對應)/g,'點暑'],[/讀數/g,'讀樹']];function pron(t){t=String(t);PRON.forEach(([r,x])=>{t=t.replace(r,x);});return t;}function speak(t){
   try{const s=window.speechSynthesis;if(!s)return;s.cancel();const u=new SpeechSynthesisUtterance(pron(t));u.lang='zh-TW';u.rate=.82;
     const vs=s.getVoices();const v=vs.find(v=>/zh[-_]TW/i.test(v.lang))||vs.find(v=>/^zh/i.test(v.lang));if(v)u.voice=v;s.speak(u);}catch(e){}
 }
@@ -1638,7 +1647,11 @@ function summary(){const m=progModes()[0][2];const _st=totalStars(),_b=[...BADGE
   units:U.map((un,u)=>({n:un.name,p:pctBy(u,m),b:store.q[u+'b']||'',a:store.q[u+'a']||'',last:(store.qh&&store.qh[u]&&store.qh[u][0])||null})),t:Date.now()};}
 const bp=s=>{const [a,b]=String(s).split('/').map(Number);return b?s+'（'+Math.round(a/b*100)+' 分）':s;};
 const fmtTime=t=>{try{return new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});}catch(e){return '';}};
+/* 學習紀錄：A、B、C 各卷的最佳成績，還沒做的卷也列出來（點一下就去做那一卷） */
+function qbOf(u,d,v){store.qb=store.qb||{};let o=store.qb[u+d+v];if(!o){const hs=((store.qh||{})[u]||[]).filter(x=>(x.d||'b')===d&&(x.v||0)===v);if(hs.length){const b=hs.reduce((m,x)=>x.r>m.r?x:m,hs[0]);o={b:b.r,n:b.n,c:hs.length,t:hs[0].t};}}return o;}
+function verChips(u){return (hasAdvQuiz()?[['b','基礎卷'],['a','進階卷']]:[['b','']]).map(([d,dn])=>`<div class="ver-row">${dn?`<span class="ver-lab">${dn}</span>`:''}${[0,1,2].map(v=>{const o=qbOf(u,d,v),nm='ABC'[v]+' 卷';return o?`<button type="button" class="ver-chip done" data-qv="${u},${d},${v}">✓ ${nm}　最佳 ${o.b}/${o.n}（${Math.round(o.b/o.n*100)} 分）${o.c>1?`・做了 ${o.c} 次`:''}</button>`:`<button type="button" class="ver-chip todo" data-qv="${u},${d},${v}">${nm}　還沒做</button>`;}).join('')}</div>`).join('');}
 function viewProgress(){
+
   const modes=progModes(),advQ=hasAdvQuiz();
   const totalLv=U.reduce((s,un)=>s+un.levels.length,0);
   const doneLv=U.reduce((s,un,u)=>s+un.levels.filter((_,l)=>doneBy(u,l,modes[0][2])).length,0);
@@ -1667,11 +1680,13 @@ function viewProgress(){
       <div class="prog-quiz">
         <div><span class="prog-lab">評量</span>${last?`最近一次 <b>${last.r} / ${last.n}・${Math.round(last.r/last.n*100)} 分</b>（${advQ?(last.d==='a'?'進階卷 ':'基礎卷 '):''}${'ABC'[last.v]||'A'} 卷，${fmtTime(last.t)}）`:'<span class="muted">還沒做過</span>'}</div>
         ${store.q[u+'b']||store.q[u+'a']?`<div class="muted">最佳：${[store.q[u+'b']?(advQ?'基礎 ':'')+bp(store.q[u+'b']):'',store.q[u+'a']?'進階 '+bp(store.q[u+'a']):''].filter(Boolean).join('　')}　・共做了 ${hist.length} 次</div>`:''}
+        ${verChips(u)}
         ${weak.length?`<div class="weak">需要再練習：${weak.map(x=>`<button type="button" class="link" data-go="u${u+1}-l${x.li+1}">第 ${x.li+1} 關 ${x.lv.title}（${x.r[0]}/${x.r[1]}）</button>`).join('')}</div>`:last?'<div class="ok-line">最近一次每一關都答對了！</div>':''}
         <button type="button" class="btn ghost small" data-go="u${u+1}-quiz">${last?'再做一次評量':'去做評量'}</button>
       </div></article>`;}).join('')}</div>
   <p class="note">「需要再練習」是依照最近一次評量答錯的題目，對應到的關卡。</p>`;
-  bindGo(V());bindHome();
+  bindGo(V());bindHome();$$('[data-qv]').forEach(b=>b.onclick=()=>{const [u,d,v]=b.dataset.qv.split(',');store.qv[+u]=+v;store.qd[+u]=d;save();go('u'+(+u+1)+'-quiz');});
+
 }
 
 /* ---------- 練習遊戲：九九乘法精熟、加減法特訓 ---------- */
@@ -1952,29 +1967,37 @@ function viewLevel(u,l){
 const peekify=t=>t.replace(/\{\{([\s\S]+?)\}\}/g,(_,x)=>`<span class="peek"><button class="peek-b no-say" type="button" aria-label="點開答案">？</button><span class="peek-v" hidden>${x}</span></span>`);
 const CIRC='①②③④⑤⑥⑦⑧';
 function stLook(box,u,l,L,goStage){
-  const X=L.look,N=X.steps.length;let i=0;
+  /* 不用「下一步」按鈕：看完答案後直接點下一個框；最後一個框看完，自動出現重點 */
+  const X=L.look,N=X.steps.length;let i=0,keyShown=false;
   box.innerHTML=`<div class="split">
     <div class="sticky"><div class="card"><span class="ex-tag">例題</span><div class="prompt"><div class="txt">${X.ex}</div></div><div class="vis-box" id="lv"></div></div></div>
-    <div><div class="card"><div class="clue-head"><b>解題線索</b><span id="lc"></span></div><ol class="clues" id="cl"></ol>
-      <p class="look-hint">先想一想，再點 <b style="color:var(--accent)">？</b> 看答案。</p>
-      <div class="navrow"><button class="btn ghost" type="button" id="lp">${ICON.back}上一步</button><button class="btn" type="button" id="ln"></button></div>
+    <div><div class="card"><div class="clue-head"><b>解題線索</b><span id="lc"></span></div><p class="look-hint look-hint-top" id="lh"></p><ol class="clues" id="cl"></ol>
+      <div class="navrow"><button class="btn" type="button" id="ln" hidden></button></div>
       <div id="lk"></div></div></div></div>`;
   $('.prompt',box).prepend(sayBtn($('.txt',box)));
-  const vis=$('#lv',box),cl=$('#cl',box),nb=$('#ln',box),pb=$('#lp',box),kb=$('#lk',box);
+  const vis=$('#lv',box),cl=$('#cl',box),nb=$('#ln',box),kb=$('#lk',box),lh=$('#lh',box);
   function visFor(j){for(let k=j;k>=0;k--)if(X.steps[k].v)return X.steps[k].v;return '';}
   function unrevealed(){return $$('.clue.cur .peek-v[hidden]',cl).length;}
-  function setBtn(){
-    if(unrevealed())nb.innerHTML=`${ICON.eye}看答案`;
-    else nb.innerHTML=i<N-1?`下一步${ICON.next}`:`看重點${ICON.next}`;
+  function hint(){
+    if(unrevealed())lh.innerHTML=`先想一想，再點 <b style="color:var(--accent)">？</b> 看答案。`;
+    else if(i<N-1)lh.innerHTML=`看懂了嗎？點下面第 ${CIRC[i+1]} 個框，看下一個線索。`;
+    else lh.innerHTML='';
+    if(lh.textContent.trim()){const t=h('<span></span>');t.innerHTML=lh.innerHTML;lh.innerHTML='';const sb=sayBtn(t);sb.style.cssText='width:1.9rem;height:1.9rem';lh.append(sb,t);}
+  }
+  function refresh(){
+    const nx=$(`.clue[data-j="${i+1}"]`,cl);
+    if(nx){const ok=!unrevealed();nx.classList.toggle('ready',ok);$('.clue-k',nx).setAttribute('aria-label',ok?`看第 ${i+2} 個線索`:'先看完上面的答案');}
+    hint();
+    if(i===N-1&&!unrevealed()&&!keyShown)setTimeout(()=>{if(!keyShown&&box.isConnected)showKey();},500);
   }
   /* 重點: the student reads it aloud once; "我唸完了" unlocks after a short wait, then 我懂 opens */
   function showKey(){
-    nb.hidden=true;pb.style.visibility='hidden';
+    keyShown=true;
     kb.innerHTML=`<div class="keypt"><b class="lab">重點：請自己唸一遍</b><div class="key-txt">${X.key}</div>
       <div class="read-row"><button class="btn ghost" type="button" id="kl">${ICON.say}先聽一次</button><button class="btn read-btn" type="button" id="kr" disabled></button></div></div>`;
     const kt=$('.key-txt',kb),kr=$('#kr',kb);
     $('#kl',kb).onclick=()=>speak(toSpeech(kt));
-    const plain=kt.textContent.replace(/\s/g,'');const total=Math.min(12,Math.max(3,Math.ceil(plain.length*0.3)));let left=total;
+    const plain=X.key.replace(/<[^>]*>/g,'').replace(/\s/g,'');const total=Math.min(12,Math.max(3,Math.ceil(plain.length*0.3)));let left=total;
     const tick=()=>{if(!kr.isConnected)return;
       if(left>0){kr.innerHTML=`請唸一遍…（${left} 秒）`;kr.style.setProperty('--p',`${(total-left)/total*100}%`);left--;setTimeout(tick,1000);}
       else{kr.disabled=false;kr.style.setProperty('--p','100%');kr.innerHTML=`${ICON.check}我唸完了`;}};
@@ -1982,25 +2005,22 @@ function stLook(box,u,l,L,goStage){
     kr.onclick=()=>{markStage(u,l,'look');kr.disabled=true;kr.innerHTML=`${ICON.check}唸完了，好棒！`;nb.hidden=false;nb.innerHTML=`去「我懂」${ICON.next}`;nb.focus({preventScroll:true});unlockTabs();};
     kb.scrollIntoView({block:'nearest',behavior:store.set.calm?'auto':'smooth'});
   }
-  function draw(){
+  /* 一開始先念題目；學生點了下一個框，才念那一格的解題線索 */
+  function draw(tap){
     const v=visFor(i);vis.innerHTML=v;vis.hidden=!v;
     $('#lc',box).textContent=`第 ${i+1} 步 / 共 ${N} 步`;
-    cl.innerHTML=X.steps.map((s,j)=>{const cls=j<i?'done':j===i?'cur':'todo';return`<li class="clue ${cls}"><button class="clue-k" type="button" data-j="${j}" ${j>i?'disabled':''}><span class="n">${CIRC[j]}</span><span>${s.k}</span></button>${j<=i?`<div class="clue-t">${j<i?s.t.replace(/\{\{([\s\S]+?)\}\}/g,'<span class="peek-v">$1</span>'):peekify(s.t)}</div>`:''}</li>`;}).join('');
-    $$('.clue-k',cl).forEach(b=>b.onclick=()=>{const j=+b.dataset.j;if(j<i){i=j;draw();}});
-    $$('.peek-b',cl).forEach(b=>b.onclick=()=>{b.hidden=true;b.nextElementSibling.hidden=false;setBtn();});
+    cl.innerHTML=X.steps.map((s,j)=>{const cls=j<i?'done':j===i?'cur':'todo';return`<li class="clue ${cls}" data-j="${j}"><button class="clue-k" type="button" data-j="${j}" ${j>i+1?'disabled':''}><span class="n">${CIRC[j]}</span><span>${s.k}</span>${j===i+1?'<span class="tap-me" aria-hidden="true">點我</span>':''}</button>${j<=i?`<div class="clue-t">${j<i?s.t.replace(/\{\{([\s\S]+?)\}\}/g,'<span class="peek-v">$1</span>'):peekify(s.t)}</div>`:''}</li>`;}).join('');
+    $$('.clue-k',cl).forEach(b=>b.onclick=()=>{const j=+b.dataset.j;
+      if(j<i){i=j;keyShown=false;kb.innerHTML='';nb.hidden=true;draw();return;}
+      if(j===i+1){if(unrevealed()){$$('.clue.cur .peek-b',cl).forEach(p=>{p.classList.remove('nudge');void p.offsetWidth;p.classList.add('nudge');});hint();return;}i=j;draw(1);}});
+    $$('.peek-b',cl).forEach(b=>b.onclick=()=>{b.hidden=true;b.nextElementSibling.hidden=false;refresh();});
     const curEl=$('.clue.cur',cl);
-    if(curEl&&!curEl.querySelector('.say')){const sb=sayBtn($('.clue-t',curEl));sb.style.cssText='width:2.3rem;height:2.3rem;margin-left:auto';$('.clue-k',curEl).append(sb);}
-    pb.style.visibility=i===0?'hidden':'visible';
-    kb.innerHTML='';nb.hidden=false;setBtn();autoSay($('.clue.cur .clue-t',cl));
+    $$('.clue.cur,.clue.done',cl).forEach(li=>{if(li.querySelector('.say'))return;const sb=sayBtn(()=>{const d=document.createElement('div');d.innerHTML=$('.clue-k span:nth-child(2)',li).innerHTML+', '+$('.clue-t',li).innerHTML;return d;});sb.style.cssText='width:2.3rem;height:2.3rem;margin-left:auto';sb.addEventListener('click',e=>e.stopPropagation());$('.clue-k',li).append(sb);});
+    refresh();if(tap)autoSay($('.clue.cur .clue-t',cl));
+    const nx=$('.clue.todo',cl);if(nx&&i>0)curEl.scrollIntoView({block:'nearest',behavior:store.set.calm?'auto':'smooth'});
   }
-  pb.onclick=()=>{if(i>0){i--;draw();}};
-  nb.onclick=()=>{
-    if(unrevealed()){$$('.clue.cur .peek',cl).forEach(p=>{$('.peek-b',p).hidden=true;$('.peek-v',p).hidden=false;});setBtn();return;}
-    if(i<N-1){i++;draw();return;}
-    if(!kb.innerHTML){showKey();return;}
-    if(stagesOf(u,l).look)goStage('know');
-  };
-  draw();
+  nb.onclick=()=>{if(stagesOf(u,l).look)goStage('know');};
+  draw();autoSay($('.prompt .txt',box));
 }
 function stKnow(box,u,l,L,goStage){
   let i=0;
@@ -2059,7 +2079,7 @@ function stDo(box,u,l,L,goStage){
     }
     const s=p.steps[i];
     const el=qa({prompt:s.p,spec:s.ans,hint:s.hint,fallback:L.look.key,num:i+1,onDone(){if(s.vis){vis.hidden=false;vis.innerHTML=s.vis;}i++;setTimeout(next,350);}});
-    steps.append(el);el.focusFirst();autoSay($('.txt',el));
+    steps.append(el);el.focusFirst();if(i>0)autoSay($('.txt',el));
   }
   autoSay($('.txt',card));next();
 }
@@ -2132,7 +2152,7 @@ function viewQuiz(u){
    <div class="qhead"><div><h1>形成性評量・${DIFF[diff].name}</h1><p class="lead">第 ${u+1} 單元《${un.name}》・共 ${items.length} 題。全部寫完再按最下面的「交卷」。</p></div>
      <div class="qopts">
        <div class="seg" role="group" aria-label="難度">${Object.entries(DIFF).map(([k,d])=>`<button type="button" data-diff="${k}" aria-pressed="${k===diff}">${d.name}<small>${d.desc}</small></button>`).join('')}</div>
-       <div class="ver">試卷版本：${VN.map((n,i)=>`<button class="chip" type="button" data-ver="${i}" aria-pressed="${i===ver}">${n} 卷</button>`).join('')}</div></div></div>
+       <div class="ver">試卷版本：${VN.map((n,i)=>`<button class="chip" type="button" data-ver="${i}" aria-pressed="${i===ver}">${n} 卷${qbOf(u,diff,i)?' ✓':''}</button>`).join('')}</div></div></div>
    <div id="qres" aria-live="polite"></div>
    <div class="qlist" id="qlist"></div>
    <div class="row" style="margin-top:1.2rem"><button class="btn" type="button" id="qsubmit">${ICON.check}交卷</button><button class="btn ghost" type="button" id="qreset">${ICON.retry}重新作答</button></div></div>`;
@@ -2154,7 +2174,7 @@ function viewQuiz(u){
       el.classList.add(ok?'right':'wrong');per[it.li].t++;if(ok){right++;per[it.li].r++;}
       if(!ok)$('.qbody',el).append(h(`<div class="fb-msg bad">${ICON.bulb}<div>正確答案：${ansText(it.ans)}</div></div>`));});
     const sc=`${right}/${W.length}`;const kk=u+diff;const prev=store.q[kk];
-    if(!prev||right>parseInt(prev))store.q[kk]=sc;store.qh=store.qh||{};(store.qh[u]=store.qh[u]||[]).unshift({t:Date.now(),d:diff,v:ver,r:right,n:W.length,per:per.map(x=>[x.r,x.t])});store.qh[u]=store.qh[u].slice(0,10);save();
+    if(!prev||right>parseInt(prev))store.q[kk]=sc;store.qh=store.qh||{};(store.qh[u]=store.qh[u]||[]).unshift({t:Date.now(),d:diff,v:ver,r:right,n:W.length,per:per.map(x=>[x.r,x.t])});store.qh[u]=store.qh[u].slice(0,10);store.qb=store.qb||{};{const k=u+diff+ver,o=store.qb[k]||{b:-1,c:0};store.qb[k]={b:Math.max(o.b,right),n:W.length,c:o.c+1,t:Date.now()};}save();
     $('#qres').innerHTML=`<div class="card" style="margin-bottom:1rem"><div class="score">${right} / ${W.length}<span class="score-pct">${Math.round(right/W.length*100)} 分</span></div><div class="lead">${right===W.length?'全部答對！':'答錯的題目，可以回到下面建議的關卡再練習。'}</div>
       <table class="key"><thead><tr><th>關卡</th><th>答對</th><th>建議</th></tr></thead><tbody>${un.levels.map((lv,li)=>`<tr><td>第 ${li+1} 關　${lv.title}</td><td>${per[li].r} / ${per[li].t}</td><td>${per[li].r===per[li].t?'很好':`<button class="link" type="button" data-go="u${u+1}-l${li+1}">回去練習 ${ICON.next}</button>`}</td></tr>`).join('')}</tbody></table></div>`;
     bindGo($('#qres'));
