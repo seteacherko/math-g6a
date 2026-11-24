@@ -1591,6 +1591,7 @@ function render(){
   try{window.speechSynthesis&&speechSynthesis.cancel();}catch(e){}
   hidePad();document.body.append(pad);drillStop();
   const hs=location.hash.slice(1);let m;
+  /* 計算練功房（九九乘法、加減）是各年級共用的捷徑，不顯示「幾上數學小步走」 */document.getElementById('go-home').style.visibility=(hs==='times'||hs==='addsub')?'hidden':'';
   if((m=hs.match(/^u(\d)-l(\d)$/))&&U[m[1]-1]&&U[m[1]-1].levels[m[2]-1])viewLevel(+m[1]-1,+m[2]-1);
   else if((m=hs.match(/^u(\d)-quiz$/))&&U[m[1]-1])viewQuiz(+m[1]-1);
   else if((m=hs.match(/^u(\d)$/))&&U[m[1]-1])viewUnit(+m[1]-1);
